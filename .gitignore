@@ -1,0 +1,7 @@
+/build/
+build.xml
+manifest.mf
+nbproject/build-impl.xml
+*.properties
+nbproject/project.xml
+Lib/*
