@@ -6,7 +6,6 @@ import managers.*;
 import continualAssistants.*;
 
 
-
 //meta! id="5"
 public class AgentCiest extends Agent
 {
@@ -14,6 +13,7 @@ public class AgentCiest extends Agent
 	{
 		super(id, mySim, parent);
 		init();
+                addOwnMessage(Mc.hold);
 	}
 
 	@Override
@@ -28,8 +28,8 @@ public class AgentCiest extends Agent
 	{
 		new ManagerCiest(Id.managerCiest, mySim(), this);
 		new ProcessCestaCA(Id.processCestaCA, mySim(), this);
-		new ProcessCestaBC(Id.processCestaBC, mySim(), this);
 		new ProcessCestaAB(Id.processCestaAB, mySim(), this);
+		new ProcessCestaBC(Id.processCestaBC, mySim(), this);
 		addOwnMessage(Mc.cestaCA);
 		addOwnMessage(Mc.cestaAB);
 		addOwnMessage(Mc.cestaBC);

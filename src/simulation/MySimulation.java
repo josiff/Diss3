@@ -5,6 +5,8 @@ import agents.*;
 
 public class MySimulation extends Simulation
 {
+    public int dovezene = 5000;
+    
 	public MySimulation()
 	{
 		init();
@@ -44,7 +46,6 @@ public class MySimulation extends Simulation
 	{
 		setAgentModelu(new AgentModelu(Id.agentModelu, this, null));
 		setAgentStavby(new AgentStavby(Id.agentStavby, this, agentModelu()));
-		setAgentVozidiel(new AgentVozidiel(Id.agentVozidiel, this, agentStavby()));
 		setAgentCiest(new AgentCiest(Id.agentCiest, this, agentStavby()));
 		setAgentObsluhy(new AgentObsluhy(Id.agentObsluhy, this, agentStavby()));
 		setAgentOkolia(new AgentOkolia(Id.agentOkolia, this, agentModelu()));
@@ -65,14 +66,6 @@ public AgentStavby agentStavby()
 
 	public void setAgentStavby(AgentStavby agentStavby)
 	{_agentStavby = agentStavby; }
-
-	private AgentVozidiel _agentVozidiel;
-
-public AgentVozidiel agentVozidiel()
-	{ return _agentVozidiel; }
-
-	public void setAgentVozidiel(AgentVozidiel agentVozidiel)
-	{_agentVozidiel = agentVozidiel; }
 
 	private AgentCiest _agentCiest;
 

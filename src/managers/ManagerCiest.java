@@ -3,7 +3,7 @@ package managers;
 import OSPABA.*;
 import simulation.*;
 import agents.*;
-
+import continualAssistants.*;
 
 
 //meta! id="5"
@@ -27,51 +27,54 @@ public class ManagerCiest extends Manager
 		}
 	}
 
+	//meta! sender="AgentStavby", id="99", type="Response"
+	public void processCestaCA(MessageForm message)
+	{
+            message.setAddressee(Id.processCestaCA);
+            startContinualAssistant(message);
+	}
+
+	//meta! sender="AgentStavby", id="35", type="Response"
+	public void processCestaAB(MessageForm message)
+	{
+            message.setAddressee(Id.processCestaAB);
+            startContinualAssistant(message);
+	}
+
+	//meta! sender="AgentStavby", id="98", type="Response"
+	public void processCestaBC(MessageForm message)
+	{
+            message.setAddressee(Id.processCestaBC);
+            startContinualAssistant(message);
+	}
+
+	//meta! sender="ProcessCestaCA", id="106", type="Finish"
+	public void processFinishProcessCestaCA(MessageForm message)
+	{
+            message.setCode(Mc.cestaCA);
+            response(message);
+	}
+
+	//meta! sender="ProcessCestaBC", id="104", type="Finish"
+	public void processFinishProcessCestaBC(MessageForm message)
+	{
+            message.setCode(Mc.cestaBC);
+            response(message);
+	}
+
+	//meta! sender="ProcessCestaAB", id="102", type="Finish"
+	public void processFinishProcessCestaAB(MessageForm message)
+	{
+            message.setCode(Mc.cestaAB);
+            response(message);
+	}
+
 	//meta! userInfo="Process messages defined in code", id="0"
 	public void processDefault(MessageForm message)
 	{
 		switch (message.code())
 		{
 		}
-	}
-
-	//meta! sender="AgentStavby", id="35", type="Notice"
-	public void processCestaAB(MessageForm message)
-	{
-            
-            message.setAddressee(Id.agentObsluhy);
-            message.setCode(Mc.naloz);
-            notice(message);
-	}
-
-	//meta! userInfo="Removed from model"
-	public void processInitCest(MessageForm message)
-	{
-	}
-
-	//meta! sender="AgentStavby", id="99", type="Notice"
-	public void processCestaCA(MessageForm message)
-	{
-	}
-
-	//meta! sender="AgentStavby", id="98", type="Notice"
-	public void processCestaBC(MessageForm message)
-	{
-	}
-
-	//meta! sender="ProcessCestaCA", id="106", type="Finish"
-	public void processFinishProcessCestaCA(MessageForm message)
-	{
-	}
-
-	//meta! sender="ProcessCestaAB", id="102", type="Finish"
-	public void processFinishProcessCestaAB(MessageForm message)
-	{
-	}
-
-	//meta! sender="ProcessCestaBC", id="104", type="Finish"
-	public void processFinishProcessCestaBC(MessageForm message)
-	{
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -82,6 +85,7 @@ public class ManagerCiest extends Manager
 	@Override
 	public void processMessage(MessageForm message)
 	{
+           // System.out.println(_mySim.currentTime() + ": " + Thread.currentThread().getStackTrace()[1].getMethodName() + ", " + (((MyMessage)message).getCar()!= null ? ((MyMessage)message).getCar().getTyp(): ""));
 		switch (message.code())
 		{
 		case Mc.finish:
@@ -91,12 +95,12 @@ public class ManagerCiest extends Manager
 				processFinishProcessCestaCA(message);
 			break;
 
-			case Id.processCestaAB:
-				processFinishProcessCestaAB(message);
-			break;
-
 			case Id.processCestaBC:
 				processFinishProcessCestaBC(message);
+			break;
+
+			case Id.processCestaAB:
+				processFinishProcessCestaAB(message);
 			break;
 			}
 		break;

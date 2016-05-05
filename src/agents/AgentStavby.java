@@ -3,7 +3,7 @@ package agents;
 import OSPABA.*;
 import simulation.*;
 import managers.*;
-
+import continualAssistants.*;
 
 
 //meta! id="3"
@@ -26,8 +26,11 @@ public class AgentStavby extends Agent
 	private void init()
 	{
 		new ManagerStavby(Id.managerStavby, mySim(), this);
-		addOwnMessage(Mc.init);
+		addOwnMessage(Mc.cestaCA);
+		addOwnMessage(Mc.cestaAB);
+		addOwnMessage(Mc.cestaBC);
 		addOwnMessage(Mc.vyloz);
+		addOwnMessage(Mc.startRep);
 		addOwnMessage(Mc.naloz);
 	}
 	//meta! tag="end"
