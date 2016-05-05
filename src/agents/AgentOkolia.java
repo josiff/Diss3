@@ -3,7 +3,7 @@ package agents;
 import OSPABA.*;
 import simulation.*;
 import managers.*;
-
+import continualAssistants.*;
 
 
 //meta! id="1"

@@ -94,7 +94,20 @@ public class Car {
     public double getAktStav(double aktCas) {
         if (endObsluhy > aktCas) {
 
-            
+            /*if (getNalozene() == 0) {
+             //core.mnozMat*100/core.sklad
+             double d = ((aktCas - startObsluhy) * getObjem()) / (endObsluhy - startObsluhy);
+
+             int v = (int) d * 100;
+             return ((v) / getObjem());
+             } else {
+             double d = ((aktCas - startObsluhy) * getNalozene()) / (endObsluhy - startObsluhy);
+             int v = (int) d * 100;
+             return 100 - ((v) / getObjem());
+             }
+             } else {
+             return 100 * getNalozene() / getObjem();
+             }*/
             if (getNalozene() == 0) {
 
                 double objem = (endObsluhy /60 - aktCas/60) * 180.0 * 10 ;

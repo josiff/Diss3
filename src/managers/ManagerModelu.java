@@ -3,8 +3,7 @@ package managers;
 import OSPABA.*;
 import simulation.*;
 import agents.*;
-
-
+import continualAssistants.*;
 
 //meta! id="2"
 public class ManagerModelu extends Manager
@@ -27,12 +26,17 @@ public class ManagerModelu extends Manager
 		}
 	}
 
-	//meta! userInfo="Removed from model"
-	public void processInit(MessageForm message)
+	//meta! sender="AgentOkolia", id="113", type="Notice"
+	public void processSpustenie(MessageForm message)
 	{
-            message.setCode(Mc.init);
-            message.setAddressee(mySim().findAgent(Id.agentStavby));
+            message.setAddressee(Id.agentStavby);
+            message.setCode(Mc.startRep);
             notice(message);
+	}
+
+	//meta! sender="AgentStavby", id="119", type="Notice"
+	public void processEndRep(MessageForm message)
+	{
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -51,8 +55,18 @@ public class ManagerModelu extends Manager
 	@Override
 	public void processMessage(MessageForm message)
 	{
+            
+            //System.out.println(_mySim.currentTime() + ": " + Thread.currentThread().getStackTrace()[1].getMethodName() + ", " + (((MyMessage)message).getCar()!= null ? ((MyMessage)message).getCar().getTyp(): ""));
 		switch (message.code())
 		{
+		case Mc.spustenie:
+			processSpustenie(message);
+		break;
+
+		case Mc.endRep:
+			processEndRep(message);
+		break;
+
 		default:
 			processDefault(message);
 		break;

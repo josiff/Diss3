@@ -7,7 +7,6 @@ public class MyMessage extends MessageForm
 {
     
     private Car car;
-    
 	public MyMessage(Simulation sim)
 	{
 		super(sim);
@@ -36,7 +35,7 @@ public class MyMessage extends MessageForm
 
     public Car getCar() {
         return car;
-    }
+}
 
     public void setCar(Car car) {
         this.car = car;

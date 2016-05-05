@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package diss3;
+package main;
 
 import simulation.MySimulation;
 
@@ -11,14 +11,18 @@ import simulation.MySimulation;
  *
  * @author Jožko
  */
-public class Diss3 {
-
-    /**
+public class Main {
+    
+     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        MySimulation sim = new MySimulation();
-        sim.simulate(1);
+    public static void main(String[] args) {      
+        
+         MySimulation sim = new MySimulation();
+         sim.simulate(1);
+         
+         
+
     }
     
 }
