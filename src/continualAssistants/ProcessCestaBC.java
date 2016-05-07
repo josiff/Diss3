@@ -59,7 +59,7 @@ public class ProcessCestaBC extends Process {
     private double getProcessCest(MessageForm message) {
 
         MyMessage msg = (MyMessage) message;
-        return 0;//msg.getCar().getRychlost() / VZDIALENOST;
+        return  VZDIALENOST / msg.getCar().getRychlost();
     }
 
 }

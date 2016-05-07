@@ -4,26 +4,38 @@ import OSPABA.*;
 import simulation.*;
 import agents.*;
 import OSPABA.Process;
+import entity.Car;
+import java.util.LinkedList;
 
 //meta! id="91"
 public class ProcessVyklad extends Process {
 
     public final static double VYKLADANIE = 200;
+    private boolean obsadeny;
 
     public ProcessVyklad(int id, Simulation mySim, CommonAgent myAgent) {
         super(id, mySim, myAgent);
+
     }
 
     @Override
     public void prepareReplication() {
         super.prepareReplication();
         // Setup component for the next replication
+        this.obsadeny = false;
     }
 
     //meta! sender="AgentObsluhy", id="92", type="Start"
     public void processStart(MessageForm message) {
-        message.setCode(Mc.hold);
-        hold(getProcessVyklad(message), message);
+
+        MyMessage msg = (MyMessage) message;
+        if (obsadeny) {
+            myAgent().getRadVykladac().add(msg);
+        } else {
+            obsadeny = true;
+            message.setCode(Mc.hold);
+            hold(getProcessVyklad(message), message);
+        }
 
     }
 
@@ -32,6 +44,15 @@ public class ProcessVyklad extends Process {
         switch (message.code()) {
             case Mc.hold:
                 assistantFinished(message);
+
+                //kontrola ci niekto necaka
+                if (myAgent().getRadVykladac().size() > 0) {
+                    MyMessage msg = myAgent().getRadVykladac().poll();
+                    msg.setCode(Mc.hold);
+                    hold(getProcessVyklad(msg), msg);
+                } else {
+                    obsadeny = false;
+                }
                 break;
         }
     }

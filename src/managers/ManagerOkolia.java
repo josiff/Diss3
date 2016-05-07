@@ -6,74 +6,72 @@ import agents.*;
 import continualAssistants.*;
 import entity.Car;
 
-
 //meta! id="1"
-public class ManagerOkolia extends Manager
-{
-	public ManagerOkolia(int id, Simulation mySim, Agent myAgent)
-	{
-		super(id, mySim, myAgent);
-		init();
-	}
+public class ManagerOkolia extends Manager {
 
-	@Override
-	public void prepareReplication()
-	{
-		super.prepareReplication();
-		// Setup component for the next replication
+    public ManagerOkolia(int id, Simulation mySim, Agent myAgent) {
+        super(id, mySim, myAgent);
+        init();
+    }
 
-		if (petriNet() != null)
-		{
-			petriNet().clear();
-		}
-	}
+    @Override
+    public void prepareReplication() {
+        super.prepareReplication();
+        // Setup component for the next replication
 
-	//meta! sender="AgentModelu", id="72", type="Notice"
-	public void processInitOko(MessageForm message)
-	{
-            Car car = new Car("A1", 60, 0.12, 80, 10);
-            MyMessage msg = (MyMessage)message;
-            msg.setCar(car);
-            msg.setCode(Mc.spustenie);
-            msg.setAddressee(Id.agentModelu);
-            notice(msg);
-	}
+        if (petriNet() != null) {
+            petriNet().clear();
+        }
+    }
 
-	//meta! userInfo="Process messages defined in code", id="0"
-	public void processDefault(MessageForm message)
-	{
-		switch (message.code())
-		{
-		}
-	}
+    //meta! sender="AgentModelu", id="72", type="Notice"
+    public void processInitOko(MessageForm message) {
+        
+        nastavMesage(message.createCopy(), myAgent().getCar("A1"));
+        nastavMesage(message.createCopy(), myAgent().getCar("A2"));
+        nastavMesage(message.createCopy(), myAgent().getCar("A3"));
+        nastavMesage(message.createCopy(), myAgent().getCar("A4"));
+    }
 
-	//meta! userInfo="Generated code: do not modify", tag="begin"
-	public void init()
-	{
-	}
+    //meta! userInfo="Process messages defined in code", id="0"
+    public void processDefault(MessageForm message) {
+        switch (message.code()) {
+        }
+    }
 
-	@Override
-	public void processMessage(MessageForm message)
-	{
-            
-          //  System.out.println(_mySim.currentTime() + ": " + Thread.currentThread().getStackTrace()[1].getMethodName() + ", " + (((MyMessage)message).getCar()!= null ? ((MyMessage)message).getCar().getTyp(): ""));
-		switch (message.code())
-		{
-		case Mc.initOko:
-			processInitOko(message);
-		break;
+    //meta! userInfo="Generated code: do not modify", tag="begin"
+    public void init() {
+    }
 
-		default:
-			processDefault(message);
-		break;
-		}
-	}
-	//meta! tag="end"
+    @Override
+    public void processMessage(MessageForm message) {
 
-	@Override
-	public AgentOkolia myAgent()
-	{
-		return (AgentOkolia)super.myAgent();
-	}
+        //  System.out.println(_mySim.currentTime() + ": " + Thread.currentThread().getStackTrace()[1].getMethodName() + ", " + (((MyMessage)message).getCar()!= null ? ((MyMessage)message).getCar().getTyp(): ""));
+        switch (message.code()) {
+            case Mc.initOko:
+                processInitOko(message);
+                break;
+
+            default:
+                processDefault(message);
+                break;
+        }
+    }
+    //meta! tag="end"
+
+    @Override
+    public AgentOkolia myAgent() {
+        return (AgentOkolia) super.myAgent();
+    }
+
+    private void nastavMesage(MessageForm message, Car car) {
+
+        MyMessage msg = (MyMessage) message;
+        msg.setCar(car);
+        msg.setCode(Mc.spustenie);
+        msg.setAddressee(Id.agentModelu);
+        notice(msg);
+
+    }
 
 }

@@ -5,111 +5,99 @@ import simulation.*;
 import agents.*;
 import continualAssistants.*;
 
-
 //meta! id="6"
-public class ManagerObsluhy extends Manager
-{
-	public ManagerObsluhy(int id, Simulation mySim, Agent myAgent)
-	{
-		super(id, mySim, myAgent);
-		init();
-	}
+public class ManagerObsluhy extends Manager {
 
-	@Override
-	public void prepareReplication()
-	{
-		super.prepareReplication();
-		// Setup component for the next replication
+    public ManagerObsluhy(int id, Simulation mySim, Agent myAgent) {
+        super(id, mySim, myAgent);
+        init();
+    }
 
-		if (petriNet() != null)
-		{
-			petriNet().clear();
-		}
-	}
+    @Override
+    public void prepareReplication() {
+        super.prepareReplication();
+        // Setup component for the next replication
 
-	//meta! sender="AgentStavby", id="37", type="Response"
-	public void processVyloz(MessageForm message)
-	{
-            message.setAddressee(Id.processVyklad);
-            startContinualAssistant(message);
-	}
+        if (petriNet() != null) {
+            petriNet().clear();
+        }
+    }
 
-	//meta! sender="ProcessVyklad", id="92", type="Finish"
-	public void processFinishProcessVyklad(MessageForm message)
-	{
-            MySimulation sim = (MySimulation)mySim();
-            MyMessage msg = (MyMessage) message;
-            sim.dovezene -= msg.getCar().getObjem();
-            message.setCode(Mc.vyloz);
-            response(message);
-	}
+    //meta! sender="AgentStavby", id="37", type="Response"
+    public void processVyloz(MessageForm message) {
+        message.setAddressee(Id.processVyklad);
+        startContinualAssistant(message);
+    }
 
-	//meta! sender="ProcessNaklad", id="81", type="Finish"
-	public void processFinishProcessNaklad(MessageForm message)
-	{
-            message.setCode(Mc.naloz);
-            response(message);
-	}
+    //meta! sender="ProcessVyklad", id="92", type="Finish"
+    public void processFinishProcessVyklad(MessageForm message) {
+        MySimulation sim = (MySimulation) mySim();
+        MyMessage msg = (MyMessage) message;
+        sim.dovezene -= msg.getCar().getObjem();
+        message.setCode(Mc.vyloz);
+        response(message);
+    }
 
-	//meta! sender="AgentStavby", id="36", type="Response"
-	public void processNaloz(MessageForm message)
-	{
-            message.setAddressee(Id.processNaklad);
-            startContinualAssistant(message);
-	}
+    //meta! sender="ProcessNaklad", id="81", type="Finish"
+    public void processFinishProcessNaklad(MessageForm message) {
+        message.setCode(Mc.naloz);
+        response(message);
+        
+        
 
-	//meta! userInfo="Process messages defined in code", id="0"
-	public void processDefault(MessageForm message)
-	{
-		switch (message.code())
-		{
-		}
-	}
+    }
 
-	//meta! userInfo="Generated code: do not modify", tag="begin"
-	public void init()
-	{
-	}
+    //meta! sender="AgentStavby", id="36", type="Response"
+    public void processNaloz(MessageForm message) {
+        message.setAddressee(Id.processNaklad);
+        startContinualAssistant(message);
+    }
 
-	@Override
-	public void processMessage(MessageForm message)
-	{
-            
-           // System.out.println(_mySim.currentTime() + ": " + Thread.currentThread().getStackTrace()[1].getMethodName() + ", " + (((MyMessage)message).getCar()!= null ? ((MyMessage)message).getCar().getTyp(): ""));
-		switch (message.code())
-		{
-		case Mc.finish:
-			switch (message.sender().id())
-			{
-			case Id.processVyklad:
-				processFinishProcessVyklad(message);
-			break;
+    //meta! userInfo="Process messages defined in code", id="0"
+    public void processDefault(MessageForm message) {
+        switch (message.code()) {
+        }
+    }
 
-			case Id.processNaklad:
-				processFinishProcessNaklad(message);
-			break;
-			}
-		break;
+    //meta! userInfo="Generated code: do not modify", tag="begin"
+    public void init() {
+    }
 
-		case Mc.naloz:
-			processNaloz(message);
-		break;
+    @Override
+    public void processMessage(MessageForm message) {
 
-		case Mc.vyloz:
-			processVyloz(message);
-		break;
+        // System.out.println(_mySim.currentTime() + ": " + Thread.currentThread().getStackTrace()[1].getMethodName() + ", " + (((MyMessage)message).getCar()!= null ? ((MyMessage)message).getCar().getTyp(): ""));
+        switch (message.code()) {
+            case Mc.finish:
+                switch (message.sender().id()) {
+                    case Id.processVyklad:
+                        processFinishProcessVyklad(message);
+                        break;
 
-		default:
-			processDefault(message);
-		break;
-		}
-	}
-	//meta! tag="end"
+                    case Id.processNaklad:
+                        processFinishProcessNaklad(message);
+                        break;
+                }
+                break;
 
-	@Override
-	public AgentObsluhy myAgent()
-	{
-		return (AgentObsluhy)super.myAgent();
-	}
+            case Mc.naloz:
+                processNaloz(message);
+                break;
+
+            case Mc.vyloz:
+                processVyloz(message);
+                break;
+
+            default:
+                processDefault(message);
+                break;
+        }
+    }
+    //meta! tag="end"
+
+    @Override
+    public AgentObsluhy myAgent() {
+        return (AgentObsluhy) super.myAgent();
+    }
 
 }
