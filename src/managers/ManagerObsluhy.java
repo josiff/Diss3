@@ -31,9 +31,9 @@ public class ManagerObsluhy extends Manager {
 
     //meta! sender="ProcessVyklad", id="92", type="Finish"
     public void processFinishProcessVyklad(MessageForm message) {
-        MySimulation sim = (MySimulation) mySim();
-        MyMessage msg = (MyMessage) message;
-        sim.dovezene -= msg.getCar().getObjem();
+        //MySimulation sim = (MySimulation) mySim();
+        // MyMessage msg = (MyMessage) message;
+        //sim.mnozstvo -= msg.getCar().getObjem();
         message.setCode(Mc.vyloz);
         response(message);
     }
@@ -42,8 +42,6 @@ public class ManagerObsluhy extends Manager {
     public void processFinishProcessNaklad(MessageForm message) {
         message.setCode(Mc.naloz);
         response(message);
-        
-        
 
     }
 

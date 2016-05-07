@@ -44,10 +44,17 @@ public class ProcessNaklad extends Process {
     public void processDefault(MessageForm message) {
         switch (message.code()) {
             case Mc.hold:
+
+                MyMessage msg = (MyMessage) message;
+                MySimulation sim = (MySimulation) mySim();
+                double d = Math.min(msg.getCar().getObjem(), sim.mnozstvo);
+                msg.getCar().setNalozene(d);
+                sim.mnozstvo -= d;
                 assistantFinished(message);
+                
                 //kontrola ci niekto necaka
                 if (myAgent().getRadNakladac().size() > 0) {
-                    MyMessage msg = myAgent().getRadNakladac().poll();
+                    msg = myAgent().getRadNakladac().poll();
                     msg.setCode(Mc.hold);
                     hold(getProcessNaklad(msg), msg);
                 } else {
@@ -80,7 +87,9 @@ public class ProcessNaklad extends Process {
     private double getProcessNaklad(MessageForm message) {
 
         MyMessage msg = (MyMessage) message;
-        return msg.getCar().getObjem() / NAKLADANIE;
+        MySimulation sim = (MySimulation) mySim();
+        double d = Math.min(msg.getCar().getObjem(), sim.mnozstvo);
+        return d / NAKLADANIE;
     }
 
 }

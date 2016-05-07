@@ -43,11 +43,16 @@ public class ProcessVyklad extends Process {
     public void processDefault(MessageForm message) {
         switch (message.code()) {
             case Mc.hold:
+
+                MyMessage msg = (MyMessage) message; 
+                MySimulation sim = (MySimulation) mySim();
+                sim.dovezene -= msg.getCar().getNalozene();
+                
                 assistantFinished(message);
 
                 //kontrola ci niekto necaka
                 if (myAgent().getRadVykladac().size() > 0) {
-                    MyMessage msg = myAgent().getRadVykladac().poll();
+                    msg = myAgent().getRadVykladac().poll();
                     msg.setCode(Mc.hold);
                     hold(getProcessVyklad(msg), msg);
                 } else {
@@ -78,8 +83,9 @@ public class ProcessVyklad extends Process {
     }
 
     private double getProcessVyklad(MessageForm message) {
-        MyMessage msg = (MyMessage) message;
-        return msg.getCar().getObjem() / VYKLADANIE;
+        MyMessage msg = (MyMessage) message;        
+        
+        return msg.getCar().getNalozene() / VYKLADANIE;
     }
 
 }

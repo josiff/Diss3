@@ -26,11 +26,41 @@ public class ManagerOkolia extends Manager {
 
     //meta! sender="AgentModelu", id="72", type="Notice"
     public void processInitOko(MessageForm message) {
-        
-        nastavMesage(message.createCopy(), myAgent().getCar("A1"));
-        nastavMesage(message.createCopy(), myAgent().getCar("A2"));
-        nastavMesage(message.createCopy(), myAgent().getCar("A3"));
-        nastavMesage(message.createCopy(), myAgent().getCar("A4"));
+
+        switch (1) {
+            case 1:
+                nastavMesage(message.createCopy(), myAgent().getCar("A1"));
+                nastavMesage(message.createCopy(), myAgent().getCar("A2"));
+                nastavMesage(message.createCopy(), myAgent().getCar("A3"));
+                nastavMesage(message.createCopy(), myAgent().getCar("A4"));
+                break;
+            case 2:
+                nastavMesage(message.createCopy(), myAgent().getCar("A1"));
+                nastavMesage(message.createCopy(), myAgent().getCar("A3"));
+                nastavMesage(message.createCopy(), myAgent().getCar("A5"));
+                break;
+            case 3:
+
+                nastavMesage(message.createCopy(), myAgent().getCar("A2"));
+                nastavMesage(message.createCopy(), myAgent().getCar("A3"));
+                nastavMesage(message.createCopy(), myAgent().getCar("A4"));
+                break;
+            case 4:
+                nastavMesage(message.createCopy(), myAgent().getCar("A1"));
+                break;
+            case 5:
+                nastavMesage(message.createCopy(), myAgent().getCar("A2"));
+                break;
+            case 6:
+                nastavMesage(message.createCopy(), myAgent().getCar("A3"));
+                break;
+            case 7:
+                nastavMesage(message.createCopy(), myAgent().getCar("A4"));
+                break;
+            case 8:
+                nastavMesage(message.createCopy(), myAgent().getCar("A5"));
+                break;
+        }
     }
 
     //meta! userInfo="Process messages defined in code", id="0"
