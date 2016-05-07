@@ -5,7 +5,9 @@ import agents.*;
 
 public class MySimulation extends Simulation
 {
-    public int dovezene = 5000;
+    public double sklad = 5000;
+    public double mnozstvo = sklad;
+    public double dovezene = sklad;
     
 	public MySimulation()
 	{

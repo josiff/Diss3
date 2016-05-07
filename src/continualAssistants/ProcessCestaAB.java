@@ -10,6 +10,8 @@ public class ProcessCestaAB extends Process {
 
     public final static double VZDIALENOST = 45;
 
+    private double lastTime;
+
     public ProcessCestaAB(int id, Simulation mySim, CommonAgent myAgent) {
         super(id, mySim, myAgent);
     }
@@ -18,13 +20,16 @@ public class ProcessCestaAB extends Process {
     public void prepareReplication() {
         super.prepareReplication();
         // Setup component for the next replication
+        lastTime = 0;
     }
 
     //meta! sender="AgentCiest", id="102", type="Start"
     public void processStart(MessageForm message) {
 
         message.setCode(Mc.hold);
-        hold(getProcessCest(message), message);
+        double d = getProcessCest(message);
+        lastTime = (lastTime + mySim().currentTime()) < (d + mySim().currentTime()) ? d : lastTime;
+        hold(lastTime, message);
     }
 
     //meta! userInfo="Process messages defined in code", id="0"
@@ -59,7 +64,7 @@ public class ProcessCestaAB extends Process {
     private double getProcessCest(MessageForm message) {
 
         MyMessage msg = (MyMessage) message;
-        return 0;//msg.getCar().getRychlost() / VZDIALENOST;
+        return VZDIALENOST / msg.getCar().getRychlost();
     }
 
 }
