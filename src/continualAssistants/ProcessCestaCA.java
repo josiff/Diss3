@@ -9,7 +9,6 @@ import OSPABA.Process;
 public class ProcessCestaCA extends Process {
 
     public final static double VZDIALENOST = 35;
-    private double lastTime;
 
     public ProcessCestaCA(int id, Simulation mySim, CommonAgent myAgent) {
         super(id, mySim, myAgent);
@@ -19,22 +18,26 @@ public class ProcessCestaCA extends Process {
     public void prepareReplication() {
         super.prepareReplication();
         // Setup component for the next replication
-        lastTime = 0;
+
     }
 
     //meta! sender="AgentCiest", id="106", type="Start"
     public void processStart(MessageForm message) {
+        MyMessage msg = (MyMessage) message;
+        myAgent().getPoradieCA().addLast(msg.getCar());
         message.setCode(Mc.hold);
         double d = getProcessCest(message);
-        lastTime = (lastTime + mySim().currentTime()) < (d + mySim().currentTime()) ? d : lastTime;
-        hold(lastTime, message);
+
+        hold(d, message);
     }
 
     //meta! userInfo="Process messages defined in code", id="0"
     public void processDefault(MessageForm message) {
         switch (message.code()) {
             case Mc.hold:
-                assistantFinished(message);
+                MyMessage msg = (MyMessage) message;
+                //msg.setCar(myAgent().getPoradieCA().pollFirst());
+                assistantFinished(msg);
                 break;
         }
     }

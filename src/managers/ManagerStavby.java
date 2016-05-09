@@ -4,6 +4,7 @@ import OSPABA.*;
 import simulation.*;
 import agents.*;
 import continualAssistants.*;
+import entity.Car;
 
 //meta! id="3"
 public class ManagerStavby extends Manager {
@@ -26,11 +27,11 @@ public class ManagerStavby extends Manager {
     //meta! sender="AgentCiest", id="99", type="Request"
     public void processCestaCA(MessageForm message) {
         MySimulation sim = (MySimulation) mySim();
-        if (sim.dovezene > 0) {
+       
             message.setAddressee(Id.agentObsluhy);
             message.setCode(Mc.naloz);
             request(message);
-        }
+       
     }
 
     //meta! sender="AgentCiest", id="35", type="Request"
@@ -51,13 +52,15 @@ public class ManagerStavby extends Manager {
     public void processVyloz(MessageForm message) {
 
         MySimulation sim = (MySimulation) mySim();
+        MyMessage msg = (MyMessage) message;
         if (sim.dovezene > 0) {
             message.setAddressee(Id.agentCiest);
             message.setCode(Mc.cestaBC);
             request(message);
         } else {
             System.out.println(sim.currentTime());
-            sim.stopSimulation();
+            System.out.println(msg.getCar().getTyp());
+            sim.stopReplication();
         }
     }
 

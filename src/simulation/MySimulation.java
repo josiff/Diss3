@@ -2,6 +2,12 @@ package simulation;
 
 import OSPABA.*;
 import agents.*;
+import entity.Car;
+import entity.Nakladac;
+import entity.Vykladac;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MySimulation extends Simulation
 {
@@ -9,9 +15,12 @@ public class MySimulation extends Simulation
     public double mnozstvo = sklad;
     public double dovezene = sklad;
     
+   
+    
 	public MySimulation()
 	{
 		init();
+                
 	}
 
 	@Override
@@ -19,6 +28,7 @@ public class MySimulation extends Simulation
 	{
 		super.prepareSimulation();
 		// Create global statistcis
+                
 	}
 
 	@Override
@@ -26,6 +36,8 @@ public class MySimulation extends Simulation
 	{
 		super.prepareReplication();
 		// Reset entities, queues, local statistics, etc...
+                
+                
 	}
 
 	@Override
@@ -93,4 +105,8 @@ public AgentOkolia agentOkolia()
 	public void setAgentOkolia(AgentOkolia agentOkolia)
 	{_agentOkolia = agentOkolia; }
 	//meta! tag="end"
+
+   
+    
+    
 }

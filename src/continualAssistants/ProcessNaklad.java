@@ -5,6 +5,7 @@ import simulation.*;
 import agents.*;
 import OSPABA.Process;
 import entity.Car;
+import entity.Nakladac;
 import java.util.LinkedList;
 
 //meta! id="80"
@@ -30,13 +31,33 @@ public class ProcessNaklad extends Process {
     public void processStart(MessageForm message) {
 
         MyMessage msg = (MyMessage) message;
+        Nakladac nak = null;
+
+        obsadeny = false;
+        for (Nakladac nakladac : myAgent().getNakladace()) {
+            
+            
+            nak = nakladac;
+            if (nakladac.isObsadeny()) {
+                obsadeny = true;
+
+            } else {
+                obsadeny = false;
+                break;
+
+            }
+            
+
+        }
         if (obsadeny) {
             myAgent().getRadNakladac().add(msg);
         } else {
-            obsadeny = true;
+            nak.setObsadeny(true);
             message.setCode(Mc.hold);
+            msg.setNakladac(nak);
             hold(getProcessNaklad(message), message);
         }
+        
 
     }
 
@@ -51,14 +72,15 @@ public class ProcessNaklad extends Process {
                 msg.getCar().setNalozene(d);
                 sim.mnozstvo -= d;
                 assistantFinished(message);
-                
+
                 //kontrola ci niekto necaka
                 if (myAgent().getRadNakladac().size() > 0) {
-                    msg = myAgent().getRadNakladac().poll();
-                    msg.setCode(Mc.hold);
-                    hold(getProcessNaklad(msg), msg);
+                    MyMessage msgRad = myAgent().getRadNakladac().poll();
+                    msgRad.setNakladac(msg.getNakladac());
+                    msgRad.setCode(Mc.hold);
+                    hold(getProcessNaklad(msgRad), msgRad);
                 } else {
-                    obsadeny = false;
+                    msg.getNakladac().setObsadeny(false);
                 }
                 break;
         }

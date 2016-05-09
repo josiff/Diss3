@@ -5,6 +5,7 @@ import simulation.*;
 import agents.*;
 import OSPABA.Process;
 import entity.Car;
+import entity.Vykladac;
 import java.util.LinkedList;
 
 //meta! id="91"
@@ -36,7 +37,7 @@ public class ProcessVyklad extends Process {
             message.setCode(Mc.hold);
             hold(getProcessVyklad(message), message);
         }
-
+        
     }
 
     //meta! userInfo="Process messages defined in code", id="0"
@@ -44,10 +45,10 @@ public class ProcessVyklad extends Process {
         switch (message.code()) {
             case Mc.hold:
 
-                MyMessage msg = (MyMessage) message; 
+                MyMessage msg = (MyMessage) message;
                 MySimulation sim = (MySimulation) mySim();
                 sim.dovezene -= msg.getCar().getNalozene();
-                
+
                 assistantFinished(message);
 
                 //kontrola ci niekto necaka
@@ -86,6 +87,6 @@ public class ProcessVyklad extends Process {
         MyMessage msg = (MyMessage) message;        
         
         return msg.getCar().getNalozene() / VYKLADANIE;
-    }
+}
 
 }

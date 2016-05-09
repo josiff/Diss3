@@ -2,11 +2,15 @@ package simulation;
 
 import OSPABA.*;
 import entity.Car;
+import entity.Nakladac;
+import entity.Vykladac;
 
 public class MyMessage extends MessageForm
 {
     
     private Car car;
+    private Vykladac vykladac;
+    private Nakladac nakladac;
 	public MyMessage(Simulation sim)
 	{
 		super(sim);
@@ -40,6 +44,24 @@ public class MyMessage extends MessageForm
     public void setCar(Car car) {
         this.car = car;
     }
+
+    public Vykladac getVykladac() {
+        return vykladac;
+    }
+
+    public void setVykladac(Vykladac vykladac) {
+        this.vykladac = vykladac;
+    }
+
+    public Nakladac getNakladac() {
+        return nakladac;
+    }
+
+    public void setNakladac(Nakladac nakladac) {
+        this.nakladac = nakladac;
+    }
+    
+    
         
         
 }
