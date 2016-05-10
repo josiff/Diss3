@@ -5,6 +5,8 @@
  */
 package entity;
 
+import java.util.Random;
+
 /**
  *
  * @author Jožko
@@ -21,8 +23,10 @@ public class Car {
     private double startObsluhy;
     private String usek;
     private double nalozene;
+    private double cena;
+    private Random rnd;
 
-    public Car(String typ, double rychlost, double pravPoruch, double oprava, int objem) {
+    public Car(String typ, double rychlost, double pravPoruch, double oprava, int objem, double cena, Random seed) {
         this.typ = typ;
         this.rychlost = rychlost;
         this.pravPoruch = pravPoruch;
@@ -31,6 +35,9 @@ public class Car {
         this.zacCakania = 0;
         this.usek = "";
         this.nalozene = 0;
+        this.cena = cena;
+        this.rnd = new Random(seed.nextLong());
+
     }
 
     public double getNalozene() {
@@ -110,15 +117,15 @@ public class Car {
              }*/
             if (getNalozene() == 0) {
 
-                double objem = (endObsluhy /60 - aktCas/60) * 180.0 * 10 ;
-                int v = (int) objem * 10 ;
+                double objem = (endObsluhy / 60 - aktCas / 60) * 180.0 * 10;
+                int v = (int) objem * 10;
                 return 100 - v / getObjem();
 
             } else {
 
-                double objem = (endObsluhy/60 - aktCas/60) * 200.0 * 10;
+                double objem = (endObsluhy / 60 - aktCas / 60) * 200.0 * 10;
                 int v = (int) objem * 10;
-                return  (v / getObjem());
+                return (v / getObjem());
 
             }
         } else {
@@ -134,6 +141,28 @@ public class Car {
 
     public void setStartObsluhy(double startObsluhy) {
         this.startObsluhy = startObsluhy;
+    }
+
+    public double getNext() {
+        return rnd.nextDouble();
+
+    }
+
+    private boolean isPokazene() {
+        double d = getNext();
+        //System.out.println("*****" + d + " car " + car.getTyp() + " ********" );        
+        return d < getPravPoruch();
+    }
+
+    public double getDlzkuOpravy() {
+
+        if (isPokazene()) {
+
+            return getOprava() /60.0;
+        } else {
+            return 0.0;
+        }
+
     }
 
 }

@@ -27,11 +27,11 @@ public class ManagerStavby extends Manager {
     //meta! sender="AgentCiest", id="99", type="Request"
     public void processCestaCA(MessageForm message) {
         MySimulation sim = (MySimulation) mySim();
-       
-            message.setAddressee(Id.agentObsluhy);
-            message.setCode(Mc.naloz);
-            request(message);
-       
+
+        message.setAddressee(Id.agentObsluhy);
+        message.setCode(Mc.naloz);
+        request(message);
+
     }
 
     //meta! sender="AgentCiest", id="35", type="Request"
@@ -90,31 +90,29 @@ public class ManagerStavby extends Manager {
 
     @Override
     public void processMessage(MessageForm message) {
-
-        //System.out.println(_mySim.currentTime() + ": " + Thread.currentThread().getStackTrace()[1].getMethodName() + ", " + (((MyMessage) message).getCar() != null ? ((MyMessage) message).getCar().getTyp() : ""));
         switch (message.code()) {
-            case Mc.cestaCA:
-                processCestaCA(message);
-                break;
-
-            case Mc.naloz:
-                processNaloz(message);
-                break;
-
             case Mc.cestaAB:
                 processCestaAB(message);
                 break;
 
-            case Mc.cestaBC:
-                processCestaBC(message);
+            case Mc.cestaCA:
+                processCestaCA(message);
+                break;
+
+            case Mc.startRep:
+                processStartRep(message);
                 break;
 
             case Mc.vyloz:
                 processVyloz(message);
                 break;
 
-            case Mc.startRep:
-                processStartRep(message);
+            case Mc.naloz:
+                processNaloz(message);
+                break;
+
+            case Mc.cestaBC:
+                processCestaBC(message);
                 break;
 
             default:

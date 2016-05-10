@@ -4,6 +4,7 @@ import OSPABA.*;
 import simulation.*;
 import agents.*;
 import continualAssistants.*;
+import instantAssistants.*;
 
 //meta! id="2"
 public class ManagerModelu extends Manager
@@ -29,9 +30,6 @@ public class ManagerModelu extends Manager
 	//meta! sender="AgentOkolia", id="113", type="Notice"
 	public void processSpustenie(MessageForm message)
 	{
-            message.setAddressee(Id.agentStavby);
-            message.setCode(Mc.startRep);
-            notice(message);
 	}
 
 	//meta! sender="AgentStavby", id="119", type="Notice"

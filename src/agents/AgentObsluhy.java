@@ -44,15 +44,19 @@ public class AgentObsluhy extends Agent {
 
     }
 
-    //meta! userInfo="Generated code: do not modify", tag="begin"
-    private void init() {
-        new ManagerObsluhy(Id.managerObsluhy, mySim(), this);
-        new ProcessVyklad(Id.processVyklad, mySim(), this);
-        new ProcessNaklad(Id.processNaklad, mySim(), this);
-        addOwnMessage(Mc.vyloz);
-        addOwnMessage(Mc.naloz);
-    }
-    //meta! tag="end"
+	//meta! userInfo="Generated code: do not modify", tag="begin"
+	private void init()
+	{
+		new ManagerObsluhy(Id.managerObsluhy, mySim(), this);
+		new PracovnaDobaVyk(Id.pracovnaDobaVyk, mySim(), this);
+		new PracovnaDobaNak2(Id.pracovnaDobaNak2, mySim(), this);
+		new ProcessNaklad(Id.processNaklad, mySim(), this);
+		new PracovnaDobaNak1(Id.pracovnaDobaNak1, mySim(), this);
+		new ProcessVyklad(Id.processVyklad, mySim(), this);
+		addOwnMessage(Mc.vyloz);
+		addOwnMessage(Mc.naloz);
+	}
+	//meta! tag="end"
 
     public SimQueue<MyMessage> getRadNakladac() {
         return radNakladac;

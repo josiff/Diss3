@@ -4,7 +4,7 @@ import OSPABA.*;
 import simulation.*;
 import managers.*;
 import continualAssistants.*;
-
+import instantAssistants.*;
 
 //meta! id="2"
 public class AgentModelu extends Agent
@@ -20,10 +20,6 @@ public class AgentModelu extends Agent
 	{
 		super.prepareReplication();
 		// Setup component for the next replication
-                MyMessage msg = new MyMessage(mySim());
-                msg.setCode(Mc.initOko);
-                msg.setAddressee(this);
-                manager().notice(msg);
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"

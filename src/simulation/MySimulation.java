@@ -8,105 +8,111 @@ import entity.Vykladac;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
-public class MySimulation extends Simulation
-{
+public class MySimulation extends Simulation {
+
     public double sklad = 5000;
     public double mnozstvo = sklad;
     public double dovezene = sklad;
-    
-   
-    
-	public MySimulation()
-	{
-		init();
-                
-	}
 
-	@Override
-	public void prepareSimulation()
-	{
-		super.prepareSimulation();
+    private Random main;
+
+    public MySimulation() {
+        main = new Random();
+        init();
+
+    }
+
+    @Override
+    public void prepareSimulation() {
+        super.prepareSimulation();
 		// Create global statistcis
-                
-	}
 
-	@Override
-	public void prepareReplication()
-	{
-		super.prepareReplication();
+    }
+
+    @Override
+    public void prepareReplication() {
+        super.prepareReplication();
 		// Reset entities, queues, local statistics, etc...
-                
-                
-	}
 
-	@Override
-	public void replicationFinished()
-	{
-		// Collect local statistics into global, update UI, etc...
-		super.replicationFinished();
-	}
+    }
 
-	@Override
-	public void simulationFinished()
-	{
-		// Dysplay simulation results
-		super.simulationFinished();
-                System.out.println(this.currentTime());
-	}
+    @Override
+    public void replicationFinished() {
+        // Collect local statistics into global, update UI, etc...
+        super.replicationFinished();
+    }
 
-	//meta! userInfo="Generated code: do not modify", tag="begin"
-	private void init()
-	{
-		setAgentModelu(new AgentModelu(Id.agentModelu, this, null));
-		setAgentStavby(new AgentStavby(Id.agentStavby, this, agentModelu()));
-		setAgentCiest(new AgentCiest(Id.agentCiest, this, agentStavby()));
-		setAgentObsluhy(new AgentObsluhy(Id.agentObsluhy, this, agentStavby()));
-		setAgentOkolia(new AgentOkolia(Id.agentOkolia, this, agentModelu()));
-	}
+    @Override
+    public void simulationFinished() {
+        // Dysplay simulation results
+        super.simulationFinished();
+        System.out.println(this.currentTime());
+    }
 
-	private AgentModelu _agentModelu;
+    //meta! userInfo="Generated code: do not modify", tag="begin"
+    private void init() {
+        setAgentModelu(new AgentModelu(Id.agentModelu, this, null));
+        setAgentStavby(new AgentStavby(Id.agentStavby, this, agentModelu()));
+        setAgentCiest(new AgentCiest(Id.agentCiest, this, agentStavby()));
+        setAgentObsluhy(new AgentObsluhy(Id.agentObsluhy, this, agentStavby()));
+        setAgentOkolia(new AgentOkolia(Id.agentOkolia, this, agentModelu()));
+    }
 
-public AgentModelu agentModelu()
-	{ return _agentModelu; }
+    private AgentModelu _agentModelu;
 
-	public void setAgentModelu(AgentModelu agentModelu)
-	{_agentModelu = agentModelu; }
+    public AgentModelu agentModelu() {
+        return _agentModelu;
+    }
 
-	private AgentStavby _agentStavby;
+    public void setAgentModelu(AgentModelu agentModelu) {
+        _agentModelu = agentModelu;
+    }
 
-public AgentStavby agentStavby()
-	{ return _agentStavby; }
+    private AgentStavby _agentStavby;
 
-	public void setAgentStavby(AgentStavby agentStavby)
-	{_agentStavby = agentStavby; }
+    public AgentStavby agentStavby() {
+        return _agentStavby;
+    }
 
-	private AgentCiest _agentCiest;
+    public void setAgentStavby(AgentStavby agentStavby) {
+        _agentStavby = agentStavby;
+    }
 
-public AgentCiest agentCiest()
-	{ return _agentCiest; }
+    private AgentCiest _agentCiest;
 
-	public void setAgentCiest(AgentCiest agentCiest)
-	{_agentCiest = agentCiest; }
+    public AgentCiest agentCiest() {
+        return _agentCiest;
+    }
 
-	private AgentObsluhy _agentObsluhy;
+    public void setAgentCiest(AgentCiest agentCiest) {
+        _agentCiest = agentCiest;
+    }
 
-public AgentObsluhy agentObsluhy()
-	{ return _agentObsluhy; }
+    private AgentObsluhy _agentObsluhy;
 
-	public void setAgentObsluhy(AgentObsluhy agentObsluhy)
-	{_agentObsluhy = agentObsluhy; }
+    public AgentObsluhy agentObsluhy() {
+        return _agentObsluhy;
+    }
 
-	private AgentOkolia _agentOkolia;
+    public void setAgentObsluhy(AgentObsluhy agentObsluhy) {
+        _agentObsluhy = agentObsluhy;
+    }
 
-public AgentOkolia agentOkolia()
-	{ return _agentOkolia; }
+    private AgentOkolia _agentOkolia;
 
-	public void setAgentOkolia(AgentOkolia agentOkolia)
-	{_agentOkolia = agentOkolia; }
-	//meta! tag="end"
+    public AgentOkolia agentOkolia() {
+        return _agentOkolia;
+    }
 
-   
-    
-    
+    public void setAgentOkolia(AgentOkolia agentOkolia) {
+        _agentOkolia = agentOkolia;
+    }
+    //meta! tag="end"
+
+    public Random getMain() {
+        return main;
+    }
+
 }

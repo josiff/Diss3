@@ -4,7 +4,7 @@ import OSPABA.*;
 import simulation.*;
 import agents.*;
 import continualAssistants.*;
-
+import instantAssistants.*;
 
 //meta! id="5"
 public class ManagerCiest extends Manager
@@ -30,43 +30,31 @@ public class ManagerCiest extends Manager
 	//meta! sender="AgentStavby", id="99", type="Response"
 	public void processCestaCA(MessageForm message)
 	{
-            message.setAddressee(Id.processCestaCA);
-            startContinualAssistant(message);
 	}
 
 	//meta! sender="AgentStavby", id="35", type="Response"
 	public void processCestaAB(MessageForm message)
 	{
-            message.setAddressee(Id.processCestaAB);
-            startContinualAssistant(message);
 	}
 
 	//meta! sender="AgentStavby", id="98", type="Response"
 	public void processCestaBC(MessageForm message)
 	{
-            message.setAddressee(Id.processCestaBC);
-            startContinualAssistant(message);
-	}
-
-	//meta! sender="ProcessCestaCA", id="106", type="Finish"
-	public void processFinishProcessCestaCA(MessageForm message)
-	{
-            message.setCode(Mc.cestaCA);
-            response(message);
 	}
 
 	//meta! sender="ProcessCestaBC", id="104", type="Finish"
 	public void processFinishProcessCestaBC(MessageForm message)
 	{
-            message.setCode(Mc.cestaBC);
-            response(message);
 	}
 
 	//meta! sender="ProcessCestaAB", id="102", type="Finish"
 	public void processFinishProcessCestaAB(MessageForm message)
 	{
-            message.setCode(Mc.cestaAB);
-            response(message);
+	}
+
+	//meta! sender="ProcessCestaCA", id="106", type="Finish"
+	public void processFinishProcessCestaCA(MessageForm message)
+	{
 	}
 
 	//meta! userInfo="Process messages defined in code", id="0"

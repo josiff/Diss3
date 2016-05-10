@@ -17,5 +17,4 @@ public class Mc extends IdList
 	//meta! tag="end"
 
 	// 1..1000 range reserved for user
-        public static final int hold = 1;
 }
