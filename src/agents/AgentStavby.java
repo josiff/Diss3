@@ -37,6 +37,7 @@ public class AgentStavby extends Agent {
 		addOwnMessage(Mc.vyloz);
 		addOwnMessage(Mc.startRep);
 		addOwnMessage(Mc.naloz);
+		addOwnMessage(Mc.mnoz);
 	}
 	//meta! tag="end"
 

@@ -47,6 +47,14 @@ public class ManagerModelu extends Manager
 		}
 	}
 
+	//meta! sender="AgentOkolia", id="144", type="Notice"
+	public void processMnozstvo(MessageForm message)
+	{
+            message.setAddressee(Id.agentStavby);
+            message.setCode(Mc.mnoz);
+            notice(message);
+	}
+
 	//meta! userInfo="Generated code: do not modify", tag="begin"
 	public void init()
 	{
@@ -59,6 +67,10 @@ public class ManagerModelu extends Manager
 		{
 		case Mc.spustenie:
 			processSpustenie(message);
+		break;
+
+		case Mc.mnozstvo:
+			processMnozstvo(message);
 		break;
 
 		case Mc.endRep:

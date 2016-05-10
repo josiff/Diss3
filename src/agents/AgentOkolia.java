@@ -18,6 +18,7 @@ public class AgentOkolia extends Agent {
         init();
         garage = new LinkedHashMap();
         initCar();
+        addOwnMessage(Mc.hold);
     }
 
     @Override
@@ -27,16 +28,17 @@ public class AgentOkolia extends Agent {
 
     }
 
-    //meta! userInfo="Generated code: do not modify", tag="begin"
-    private void init() {
-        new ManagerOkolia(Id.managerOkolia, mySim(), this);
-        new Odoberanie(Id.odoberanie, mySim(), this);
-        new DodavatelC(Id.dodavatelC, mySim(), this);
-        new DodavatelA(Id.dodavatelA, mySim(), this);
-        new DodavatelB(Id.dodavatelB, mySim(), this);
-        addOwnMessage(Mc.initOko);
-    }
-    //meta! tag="end"
+	//meta! userInfo="Generated code: do not modify", tag="begin"
+	private void init()
+	{
+		new ManagerOkolia(Id.managerOkolia, mySim(), this);
+		new Odoberanie(Id.odoberanie, mySim(), this);
+		new DodavatelC(Id.dodavatelC, mySim(), this);
+		new DodavatelA(Id.dodavatelA, mySim(), this);
+		new DodavatelB(Id.dodavatelB, mySim(), this);
+		addOwnMessage(Mc.initOko);
+	}
+	//meta! tag="end"
 
     public void addToGarage(Car car) {
         garage.put(car.getTyp(), car);

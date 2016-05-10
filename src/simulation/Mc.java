@@ -7,6 +7,9 @@ public class Mc extends IdList
 	//meta! userInfo="Generated code: do not modify", tag="begin"
 	public static final int initOko = 1013;
 	public static final int startRep = 1003;
+	public static final int mnozstvo = 1025;
+	public static final int mnoz = 1026;
+	public static final int mnozMat = 1027;
 	public static final int cestaBC = 1019;
 	public static final int cestaAB = 1008;
 	public static final int cestaCA = 1020;

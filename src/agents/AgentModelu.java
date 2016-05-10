@@ -30,6 +30,7 @@ public class AgentModelu extends Agent
 	private void init()
 	{
 		new ManagerModelu(Id.managerModelu, mySim(), this);
+		addOwnMessage(Mc.mnozstvo);
 		addOwnMessage(Mc.spustenie);
 		addOwnMessage(Mc.endRep);
 	}

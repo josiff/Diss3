@@ -54,6 +54,7 @@ public class AgentObsluhy extends Agent {
 		new PracovnaDobaNak1(Id.pracovnaDobaNak1, mySim(), this);
 		new ProcessVyklad(Id.processVyklad, mySim(), this);
 		addOwnMessage(Mc.vyloz);
+		addOwnMessage(Mc.mnozMat);
 		addOwnMessage(Mc.naloz);
 	}
 	//meta! tag="end"

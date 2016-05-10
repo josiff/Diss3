@@ -72,6 +72,15 @@ public class ManagerObsluhy extends Manager {
 	{
 	}
 
+	//meta! sender="AgentStavby", id="147", type="Notice"
+	public void processMnozMat(MessageForm message)
+	{
+            MySimulation sim = (MySimulation) mySim();
+            MyMessage msg = (MyMessage) message;
+            sim.mnozstvo += msg.getMnozstvo();
+            System.out.println("mnozstvo " + sim.mnozstvo);
+	}
+
 	//meta! userInfo="Generated code: do not modify", tag="begin"
 	public void init()
 	{
@@ -113,6 +122,10 @@ public class ManagerObsluhy extends Manager {
 
 		case Mc.naloz:
 			processNaloz(message);
+		break;
+
+		case Mc.mnozMat:
+			processMnozMat(message);
 		break;
 
 		default:

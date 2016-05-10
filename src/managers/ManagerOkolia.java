@@ -24,8 +24,12 @@ public class ManagerOkolia extends Manager {
         }
     }
 
-	//meta! sender="AgentModelu", id="72", type="Notice"
-	public void processInitOko(MessageForm message) {
+    //meta! sender="AgentModelu", id="72", type="Notice"
+    public void processInitOko(MessageForm message) {
+
+        MessageForm msg = message.createCopy();
+        msg.setAddressee(Id.dodavatelA);
+        startContinualAssistant(msg);
 
         switch (1) {
             case 1:
@@ -61,75 +65,71 @@ public class ManagerOkolia extends Manager {
                 nastavMesage(message.createCopy(), myAgent().getCar("A5"));
                 break;
         }
+
     }
 
-	//meta! userInfo="Process messages defined in code", id="0"
-	public void processDefault(MessageForm message) {
+    //meta! userInfo="Process messages defined in code", id="0"
+    public void processDefault(MessageForm message) {
         switch (message.code()) {
         }
     }
 
-	//meta! sender="Odoberanie", id="126", type="Finish"
-	public void processFinishOdoberanie(MessageForm message)
-	{
-	}
+    //meta! sender="Odoberanie", id="126", type="Finish"
+    public void processFinishOdoberanie(MessageForm message) {
+    }
 
-	//meta! sender="DodavatelB", id="128", type="Finish"
-	public void processFinishDodavatelB(MessageForm message)
-	{
-	}
+    //meta! sender="DodavatelB", id="128", type="Finish"
+    public void processFinishDodavatelB(MessageForm message) {
+    }
 
-	//meta! sender="DodavatelC", id="130", type="Finish"
-	public void processFinishDodavatelC(MessageForm message)
-	{
-	}
+    //meta! sender="DodavatelC", id="130", type="Finish"
+    public void processFinishDodavatelC(MessageForm message) {
+    }
 
-	//meta! sender="DodavatelA", id="124", type="Finish"
-	public void processFinishDodavatelA(MessageForm message)
-	{
-	}
+    //meta! sender="DodavatelA", id="124", type="Finish"
+    public void processFinishDodavatelA(MessageForm message) {
+        message.setAddressee(Id.agentModelu);
+        message.setCode(Mc.mnozstvo);
+        notice(message);
+    }
 
-	//meta! userInfo="Generated code: do not modify", tag="begin"
-	public void init()
-	{
-	}
+    //meta! userInfo="Generated code: do not modify", tag="begin"
+    public void init() {
+    }
 
-	@Override
-	public void processMessage(MessageForm message)
-	{
-		switch (message.code())
-		{
-		case Mc.finish:
-			switch (message.sender().id())
-			{
-			case Id.odoberanie:
-				processFinishOdoberanie(message);
-			break;
+    @Override
+    public void processMessage(MessageForm message) {
+        switch (message.code()) {
+            case Mc.finish:
+                switch (message.sender().id()) {
+                    case Id.odoberanie:
+                        processFinishOdoberanie(message);
+                        break;
 
-			case Id.dodavatelB:
-				processFinishDodavatelB(message);
-			break;
+                    case Id.dodavatelB:
+                        processFinishDodavatelB(message);
+                        break;
 
-			case Id.dodavatelC:
-				processFinishDodavatelC(message);
-			break;
+                    case Id.dodavatelC:
+                        processFinishDodavatelC(message);
+                        break;
 
-			case Id.dodavatelA:
-				processFinishDodavatelA(message);
-			break;
-			}
-		break;
+                    case Id.dodavatelA:
+                        processFinishDodavatelA(message);
+                        break;
+                }
+                break;
 
-		case Mc.initOko:
-			processInitOko(message);
-		break;
+            case Mc.initOko:
+                processInitOko(message);
+                break;
 
-		default:
-			processDefault(message);
-		break;
-		}
-	}
-	//meta! tag="end"
+            default:
+                processDefault(message);
+                break;
+        }
+    }
+    //meta! tag="end"
 
     @Override
     public AgentOkolia myAgent() {

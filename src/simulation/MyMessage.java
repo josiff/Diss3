@@ -11,6 +11,7 @@ public class MyMessage extends MessageForm
     private Car car;
     private Vykladac vykladac;
     private Nakladac nakladac;
+    private double mnozstvo;
 	public MyMessage(Simulation sim)
 	{
 		super(sim);
@@ -60,6 +61,16 @@ public class MyMessage extends MessageForm
     public void setNakladac(Nakladac nakladac) {
         this.nakladac = nakladac;
     }
+
+    public double getMnozstvo() {
+        return mnozstvo;
+    }
+
+    public void setMnozstvo(double mnozstvo) {
+        this.mnozstvo = mnozstvo;
+    }
+    
+    
     
     
         
