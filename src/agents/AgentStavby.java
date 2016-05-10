@@ -32,12 +32,13 @@ public class AgentStavby extends Agent {
 	{
 		new ManagerStavby(Id.managerStavby, mySim(), this);
 		addOwnMessage(Mc.cestaCA);
-		addOwnMessage(Mc.cestaAB);
 		addOwnMessage(Mc.cestaBC);
+		addOwnMessage(Mc.cestaAB);
 		addOwnMessage(Mc.vyloz);
 		addOwnMessage(Mc.startRep);
+		addOwnMessage(Mc.mnozDovez);
+		addOwnMessage(Mc.mnozOdo);
 		addOwnMessage(Mc.naloz);
-		addOwnMessage(Mc.mnoz);
 	}
 	//meta! tag="end"
 

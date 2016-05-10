@@ -65,6 +65,7 @@ public class ManagerObsluhy extends Manager {
 	//meta! sender="PracovnaDobaNak2", id="137", type="Finish"
 	public void processFinishPracovnaDobaNak2(MessageForm message)
 	{
+            
 	}
 
 	//meta! sender="PracovnaDobaVyk", id="135", type="Finish"
@@ -73,12 +74,22 @@ public class ManagerObsluhy extends Manager {
 	}
 
 	//meta! sender="AgentStavby", id="147", type="Notice"
-	public void processMnozMat(MessageForm message)
+	public void processMnozDo(MessageForm message)
 	{
             MySimulation sim = (MySimulation) mySim();
             MyMessage msg = (MyMessage) message;
             sim.mnozstvo += msg.getMnozstvo();
             System.out.println("mnozstvo " + sim.mnozstvo);
+	}
+
+	//meta! sender="AgentStavby", id="155", type="Notice"
+	public void processMnozsOd(MessageForm message)
+	{
+            MySimulation sim = (MySimulation) mySim();
+            MyMessage msg = (MyMessage) message;
+           // sim.mnozstvo -= msg.getMnozstvo();
+            System.out.println("odobrate " + msg.getMnozstvo());
+            
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -116,6 +127,10 @@ public class ManagerObsluhy extends Manager {
 			}
 		break;
 
+		case Mc.mnozsOd:
+			processMnozsOd(message);
+		break;
+
 		case Mc.vyloz:
 			processVyloz(message);
 		break;
@@ -124,8 +139,8 @@ public class ManagerObsluhy extends Manager {
 			processNaloz(message);
 		break;
 
-		case Mc.mnozMat:
-			processMnozMat(message);
+		case Mc.mnozDo:
+			processMnozDo(message);
 		break;
 
 		default:

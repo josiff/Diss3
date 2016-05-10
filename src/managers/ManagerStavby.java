@@ -85,10 +85,18 @@ public class ManagerStavby extends Manager {
     }
 
 	//meta! sender="AgentModelu", id="145", type="Notice"
-	public void processMnoz(MessageForm message)
+	public void processMnozDovez(MessageForm message)
 	{
             message.setAddressee(Id.agentObsluhy);
-            message.setCode(Mc.mnozMat);
+            message.setCode(Mc.mnozDo);
+            notice(message);
+	}
+
+	//meta! sender="AgentModelu", id="154", type="Notice"
+	public void processMnozOdo(MessageForm message)
+	{
+            message.setAddressee(Id.agentObsluhy);
+            message.setCode(Mc.mnozsOd);
             notice(message);
 	}
 
@@ -102,6 +110,14 @@ public class ManagerStavby extends Manager {
 	{
 		switch (message.code())
 		{
+		case Mc.cestaBC:
+			processCestaBC(message);
+		break;
+
+		case Mc.mnozDovez:
+			processMnozDovez(message);
+		break;
+
 		case Mc.cestaAB:
 			processCestaAB(message);
 		break;
@@ -114,20 +130,16 @@ public class ManagerStavby extends Manager {
 			processStartRep(message);
 		break;
 
+		case Mc.mnozOdo:
+			processMnozOdo(message);
+		break;
+
 		case Mc.vyloz:
 			processVyloz(message);
 		break;
 
 		case Mc.naloz:
 			processNaloz(message);
-		break;
-
-		case Mc.cestaBC:
-			processCestaBC(message);
-		break;
-
-		case Mc.mnoz:
-			processMnoz(message);
 		break;
 
 		default:

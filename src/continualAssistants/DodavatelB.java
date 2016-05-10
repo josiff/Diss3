@@ -4,6 +4,7 @@ import OSPABA.*;
 import OSPRNG.DeterministicRNG;
 import OSPRNG.EmpiricPair;
 import OSPRNG.EmpiricRNG;
+import OSPRNG.ExponentialRNG;
 import simulation.*;
 import agents.*;
 
@@ -11,6 +12,7 @@ import agents.*;
 public class DodavatelB extends Scheduler {
 
     private EmpiricRNG empiric;
+    private ExponentialRNG expo;
 
     public DodavatelB(int id, Simulation mySim, CommonAgent myAgent) {
         super(id, mySim, myAgent);
@@ -31,6 +33,8 @@ public class DodavatelB extends Scheduler {
                 new EmpiricPair(new DeterministicRNG(19.0), 0.20990),
                 new EmpiricPair(new DeterministicRNG(20.0), 0.22253),
                 new EmpiricPair(new DeterministicRNG(21.0), 0.07090));
+
+        expo = new ExponentialRNG(36.8, 3.0);
     }
 
     @Override
@@ -41,11 +45,24 @@ public class DodavatelB extends Scheduler {
 
 	//meta! sender="AgentOkolia", id="128", type="Start"
 	public void processStart(MessageForm message) {
+        message.setCode(Mc.hold);
+        hold(expo.sample()/60.0, message);
     }
 
 	//meta! userInfo="Process messages defined in code", id="0"
 	public void processDefault(MessageForm message) {
         switch (message.code()) {
+            case Mc.hold:
+                MessageForm copy = message.createCopy();
+                //odoslanie spravy mnozstva
+                MyMessage msg = (MyMessage) message;
+                msg.setMnozstvo((double) empiric.sample());
+                msg.setCode(Mc.mnozstvoDovez);
+                assistantFinished(msg);
+
+                hold(expo.sample()/60.0, copy);
+
+                break;
         }
     }
 

@@ -12,6 +12,7 @@ import agents.*;
 public class Odoberanie extends Scheduler {
 
     private EmpiricRNG empiric;
+    private double time = 0.5; //kazdych 30 min
 
     public Odoberanie(int id, Simulation mySim, CommonAgent myAgent) {
         super(id, mySim, myAgent);
@@ -22,7 +23,6 @@ public class Odoberanie extends Scheduler {
                 new EmpiricPair(new UniformDiscreteRNG(66, 79), 0.3),
                 new EmpiricPair(new UniformDiscreteRNG(80, 99), 0.15));
 
-        
     }
 
     @Override
@@ -33,11 +33,23 @@ public class Odoberanie extends Scheduler {
 
     //meta! sender="AgentOkolia", id="126", type="Start"
     public void processStart(MessageForm message) {
+        message.setCode(Mc.hold);
+        hold(time, message);
     }
 
     //meta! userInfo="Process messages defined in code", id="0"
     public void processDefault(MessageForm message) {
         switch (message.code()) {
+            case Mc.hold:
+                MessageForm copy = message.createCopy();
+                //odoslanie spravy mnozstva
+                MyMessage msg = (MyMessage) message;                
+                msg.setMnozstvo((int) empiric.sample());                
+                assistantFinished(msg);
+
+                hold(time, copy);
+
+                break;
         }
     }
 

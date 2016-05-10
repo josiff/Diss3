@@ -46,7 +46,7 @@ public class DodavatelA extends Scheduler {
 	//meta! sender="AgentOkolia", id="124", type="Start"
 	public void processStart(MessageForm message) {
         message.setCode(Mc.hold);
-        hold(expo.sample(), message);
+        hold(expo.sample()/60.0, message);
         
     }
 
@@ -58,10 +58,10 @@ public class DodavatelA extends Scheduler {
                 //odoslanie spravy mnozstva
                 MyMessage msg = (MyMessage) message;
                 msg.setMnozstvo((double)empiric.sample());
-                msg.setCode(Mc.mnozstvo);                
+                msg.setCode(Mc.mnozstvoDovez);                
                 assistantFinished(msg);
                 
-                hold(expo.sample(), copy);
+                hold(expo.sample()/60.0, copy);
                 
                 break;
         }

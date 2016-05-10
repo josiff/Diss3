@@ -27,9 +27,14 @@ public class ManagerOkolia extends Manager {
     //meta! sender="AgentModelu", id="72", type="Notice"
     public void processInitOko(MessageForm message) {
 
-        MessageForm msg = message.createCopy();
-        msg.setAddressee(Id.dodavatelA);
-        startContinualAssistant(msg);
+       
+        
+        nastavContiAsis(Id.dodavatelA, message);
+        nastavContiAsis(Id.dodavatelB, message);
+        nastavContiAsis(Id.dodavatelC, message);
+         nastavContiAsis(Id.odoberanie, message);
+        
+        
 
         switch (1) {
             case 1:
@@ -76,6 +81,9 @@ public class ManagerOkolia extends Manager {
 
     //meta! sender="Odoberanie", id="126", type="Finish"
     public void processFinishOdoberanie(MessageForm message) {
+        message.setAddressee(Id.agentModelu);
+        message.setCode(Mc.mnozOdob);
+        notice(message);
     }
 
     //meta! sender="DodavatelB", id="128", type="Finish"
@@ -89,7 +97,7 @@ public class ManagerOkolia extends Manager {
     //meta! sender="DodavatelA", id="124", type="Finish"
     public void processFinishDodavatelA(MessageForm message) {
         message.setAddressee(Id.agentModelu);
-        message.setCode(Mc.mnozstvo);
+        message.setCode(Mc.mnozstvoDovez);
         notice(message);
     }
 
@@ -144,6 +152,12 @@ public class ManagerOkolia extends Manager {
         msg.setAddressee(Id.agentModelu);
         notice(msg);
 
+    }
+    
+    private void nastavContiAsis( int id, MessageForm message){
+        MessageForm msg = message.createCopy();
+        msg.setAddressee(id);
+        startContinualAssistant(msg);
     }
 
 }
