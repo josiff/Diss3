@@ -8,8 +8,7 @@ import OSPABA.Process;
 //meta! id="101"
 public class ProcessCestaAB extends Process {
 
-    public final static double VZDIALENOST = 45;
-
+    public final static double VZDIALENOST = 45;    
     private double lastTime;
 
     public ProcessCestaAB(int id, Simulation mySim, CommonAgent myAgent) {
@@ -21,40 +20,49 @@ public class ProcessCestaAB extends Process {
         super.prepareReplication();
         // Setup component for the next replication
         lastTime = 0;
+
     }
 
-    //meta! sender="AgentCiest", id="102", type="Start"
-    public void processStart(MessageForm message) {
+	//meta! sender="AgentCiest", id="102", type="Start"
+	public void processStart(MessageForm message) {
 
-        message.setCode(Mc.hold);
-        double d = getProcessCest(message);
-        lastTime = (lastTime + mySim().currentTime()) < (d + mySim().currentTime()) ? d : lastTime;
-        hold(lastTime, message);
+        MyMessage msg = (MyMessage) message;
+        myAgent().getPoradieAB().addLast(msg.getCar());
+        msg.setCode(Mc.hold);
+        msg.getCar().setUsek("A->B");
+        double d = getProcessCest(msg);
+        hold(d, msg);
+
     }
 
-    //meta! userInfo="Process messages defined in code", id="0"
-    public void processDefault(MessageForm message) {
+	//meta! userInfo="Process messages defined in code", id="0"
+	public void processDefault(MessageForm message) {
         switch (message.code()) {
             case Mc.hold:
-                assistantFinished(message);
+                MyMessage msg = (MyMessage) message;
+                msg.setCar(myAgent().getPoradieAB().pollFirst());                
+                assistantFinished(msg);
+
                 break;
         }
     }
 
-    //meta! userInfo="Generated code: do not modify", tag="begin"
-    @Override
-    public void processMessage(MessageForm message) {
-        switch (message.code()) {
-            case Mc.start:
-                processStart(message);
-                break;
+	//meta! userInfo="Generated code: do not modify", tag="begin"
+	@Override
+	public void processMessage(MessageForm message)
+	{
+		switch (message.code())
+		{
+		case Mc.start:
+			processStart(message);
+		break;
 
-            default:
-                processDefault(message);
-                break;
-        }
-    }
-    //meta! tag="end"
+		default:
+			processDefault(message);
+		break;
+		}
+	}
+	//meta! tag="end"
 
     @Override
     public AgentCiest myAgent() {
@@ -64,7 +72,10 @@ public class ProcessCestaAB extends Process {
     private double getProcessCest(MessageForm message) {
 
         MyMessage msg = (MyMessage) message;
-        return VZDIALENOST / msg.getCar().getRychlost();
+        double d = VZDIALENOST / msg.getCar().getRychlost() * 60.0 + msg.deliveryTime();
+        lastTime = lastTime < d  ? d : lastTime;
+        return lastTime - msg.deliveryTime();
+        
     }
 
 }

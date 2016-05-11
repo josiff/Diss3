@@ -2,55 +2,41 @@ package simulation;
 
 import OSPABA.*;
 import agents.*;
-import entity.Car;
-import entity.Bager;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+public class MySimulation extends Simulation
+{
+	public MySimulation()
+	{
+		init();
+	}
 
-public class MySimulation extends Simulation {
+	@Override
+	public void prepareSimulation()
+	{
+		super.prepareSimulation();
+		// Create global statistcis
+	}
 
-    private Random main;
-    public double dayCount;
-  
+	@Override
+	public void prepareReplication()
+	{
+		super.prepareReplication();
+		// Reset entities, queues, local statistics, etc...
+	}
 
-    public final static double DAY_HOUR = 24 * 60;
+	@Override
+	public void replicationFinished()
+	{
+		// Collect local statistics into global, update UI, etc...
+		super.replicationFinished();
+	}
 
-    public MySimulation() {
-        main = new Random();
-        init();
-
-    }
-
-    @Override
-    public void prepareSimulation() {
-        super.prepareSimulation();
-        // Create global statistcis
-
-    }
-
-    @Override
-    public void prepareReplication() {
-        super.prepareReplication();
-        // Reset entities, queues, local statistics, etc...
-
-    }
-
-    @Override
-    public void replicationFinished() {
-        // Collect local statistics into global, update UI, etc...
-        super.replicationFinished();
-
-    }
-
-    @Override
-    public void simulationFinished() {
-        // Dysplay simulation results
-        super.simulationFinished();
-        System.out.println(this.currentTime());
-    }
+	@Override
+	public void simulationFinished()
+	{
+		// Dysplay simulation results
+		super.simulationFinished();
+	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
 	private void init()
@@ -102,9 +88,4 @@ public AgentOkolia agentOkolia()
 	public void setAgentOkolia(AgentOkolia agentOkolia)
 	{_agentOkolia = agentOkolia; }
 	//meta! tag="end"
-
-    public Random getMain() {
-        return main;
-    }
-
 }

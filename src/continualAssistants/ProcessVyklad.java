@@ -4,7 +4,9 @@ import OSPABA.*;
 import simulation.*;
 import agents.*;
 import OSPABA.Process;
+import entity.Bager;
 import entity.Car;
+
 import java.util.LinkedList;
 
 //meta! id="91"
@@ -25,57 +27,84 @@ public class ProcessVyklad extends Process {
         this.obsadeny = false;
     }
 
-    //meta! sender="AgentObsluhy", id="92", type="Start"
-    public void processStart(MessageForm message) {
+	//meta! sender="AgentObsluhy", id="92", type="Start"
+	public void processStart(MessageForm message) {
 
         MyMessage msg = (MyMessage) message;
+        Bager vyk = null;
+
+        obsadeny = true;
+        for (Bager bager : myAgent().getBagre()) {
+
+            if (bager.getTyp() == Bager.VYKLADAC) {
+                if (bager.isAktivny()) {
+                    vyk = bager;
+                    if (bager.isObsadeny()) {
+                        obsadeny = true;
+                    } else {
+                        obsadeny = false;
+                        break;
+                    }
+                }
+            }
+
+        }
+
         if (obsadeny) {
             myAgent().getRadVykladac().add(msg);
+            msg.getCar().setUsek("cakanie vykladac");
         } else {
-            obsadeny = true;
+            msg.getCar().setUsek("vykladanie");
+            vyk.setObsadeny(true);
+            msg.setBager(vyk);
             message.setCode(Mc.hold);
             hold(getProcessVyklad(message), message);
         }
 
     }
 
-    //meta! userInfo="Process messages defined in code", id="0"
-    public void processDefault(MessageForm message) {
+	//meta! userInfo="Process messages defined in code", id="0"
+	public void processDefault(MessageForm message) {
         switch (message.code()) {
             case Mc.hold:
 
-                MyMessage msg = (MyMessage) message; 
+                MyMessage msg = (MyMessage) message;
                 MySimulation sim = (MySimulation) mySim();
-                sim.dovezene -= msg.getCar().getNalozene();
-                
+                myAgent().dovezene += msg.getCar().getNalozene();
+                msg.getCar().setNalozene(0);
+
                 assistantFinished(message);
 
                 //kontrola ci niekto necaka
                 if (myAgent().getRadVykladac().size() > 0) {
-                    msg = myAgent().getRadVykladac().poll();
-                    msg.setCode(Mc.hold);
-                    hold(getProcessVyklad(msg), msg);
+                    MyMessage msgRad = myAgent().getRadVykladac().poll();
+                    msgRad.setBager(msg.getBager());
+                    msgRad.getCar().setUsek("vykladanie");
+                    msgRad.setCode(Mc.hold);
+                    hold(getProcessVyklad(msgRad), msgRad);
                 } else {
-                    obsadeny = false;
+                    msg.getBager().setObsadeny(false);
                 }
                 break;
         }
     }
 
-    //meta! userInfo="Generated code: do not modify", tag="begin"
-    @Override
-    public void processMessage(MessageForm message) {
-        switch (message.code()) {
-            case Mc.start:
-                processStart(message);
-                break;
+	//meta! userInfo="Generated code: do not modify", tag="begin"
+	@Override
+	public void processMessage(MessageForm message)
+	{
+		switch (message.code())
+		{
+		case Mc.start:
+			processStart(message);
+		break;
 
-            default:
-                processDefault(message);
-                break;
-        }
-    }
-    //meta! tag="end"
+		default:
+			processDefault(message);
+		break;
+		}
+	}
+	//meta! tag="end"
 
     @Override
     public AgentObsluhy myAgent() {
@@ -83,9 +112,9 @@ public class ProcessVyklad extends Process {
     }
 
     private double getProcessVyklad(MessageForm message) {
-        MyMessage msg = (MyMessage) message;        
-        
-        return msg.getCar().getNalozene() / VYKLADANIE;
+        MyMessage msg = (MyMessage) message;
+
+        return msg.getCar().getNalozene() / msg.getBager().getVykon() * 60.0;
     }
 
 }

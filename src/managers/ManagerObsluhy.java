@@ -4,6 +4,7 @@ import OSPABA.*;
 import simulation.*;
 import agents.*;
 import continualAssistants.*;
+import entity.Bager;
 
 //meta! id="6"
 public class ManagerObsluhy extends Manager {
@@ -57,19 +58,62 @@ public class ManagerObsluhy extends Manager {
         }
     }
 
+    //meta! sender="PracovnaDobaNak1", id="133", type="Finish"
+    public void processFinishPracovnaDobaNak1(MessageForm message) {
+
+    }
+
+    //meta! sender="AgentStavby", id="147", type="Notice"
+    public void processMaterialObsluha(MessageForm message) {
+        MySimulation sim = (MySimulation) mySim();
+        MyMessage msg = (MyMessage) message;
+
+        //System.out.println("mnozstvo " + sim.mnozstvo);
+        if (msg.getMnozstvo() > 0) {
+            myAgent().mnozstvo += msg.getMnozstvo();
+        } else {
+            myAgent().dovezene += msg.getMnozstvo();
+        }
+    }
+
+    //meta! sender="AgentStavby", id="164", type="Notice"
+    public void processInitBagre(MessageForm message) {
+        MyMessage msg;
+        for (Bager bager : myAgent().getBagre()) {
+            msg = (MyMessage) message.createCopy();
+            msg.setBager(bager);
+            msg.setAddressee(Id.pracovnaDobaNak1);
+            startContinualAssistant(msg);
+        }
+    }
+
     //meta! userInfo="Generated code: do not modify", tag="begin"
     public void init() {
     }
 
     @Override
     public void processMessage(MessageForm message) {
-
-        // System.out.println(_mySim.currentTime() + ": " + Thread.currentThread().getStackTrace()[1].getMethodName() + ", " + (((MyMessage)message).getCar()!= null ? ((MyMessage)message).getCar().getTyp(): ""));
         switch (message.code()) {
+            case Mc.vyloz:
+                processVyloz(message);
+                break;
+
+            case Mc.materialObsluha:
+                processMaterialObsluha(message);
+                break;
+
+            case Mc.initBagre:
+                processInitBagre(message);
+                break;
+
             case Mc.finish:
                 switch (message.sender().id()) {
                     case Id.processVyklad:
                         processFinishProcessVyklad(message);
+                        break;
+
+                    case Id.pracovnaDobaNak1:
+                        processFinishPracovnaDobaNak1(message);
                         break;
 
                     case Id.processNaklad:
@@ -80,10 +124,6 @@ public class ManagerObsluhy extends Manager {
 
             case Mc.naloz:
                 processNaloz(message);
-                break;
-
-            case Mc.vyloz:
-                processVyloz(message);
                 break;
 
             default:
