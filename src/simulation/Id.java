@@ -18,9 +18,7 @@ public class Id extends IdList
 	public static final int dodavatelC = 1027;
 	public static final int pracovnaDobaNak1 = 1028;
 	public static final int processCestaAB = 1021;
-	public static final int pracovnaDobaVyk = 1029;
 	public static final int processCestaBC = 1022;
-	public static final int pracovnaDobaNak2 = 1030;
 	public static final int processCestaCA = 1023;
 	public static final int processNaklad = 1018;
 	public static final int processVyklad = 1020;

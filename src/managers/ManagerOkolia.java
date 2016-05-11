@@ -81,28 +81,28 @@ public class ManagerOkolia extends Manager {
 	//meta! sender="Odoberanie", id="126", type="Finish"
 	public void processFinishOdoberanie(MessageForm message) {
         message.setAddressee(Id.agentModelu);
-        message.setCode(Mc.mnozOdob);
+        message.setCode(Mc.materialModel);
         notice(message);
     }
 
 	//meta! sender="DodavatelB", id="128", type="Finish"
 	public void processFinishDodavatelB(MessageForm message) {
         message.setAddressee(Id.agentModelu);
-        message.setCode(Mc.mnozstvoDovez);
+        message.setCode(Mc.materialModel);
         notice(message);
     }
 
 	//meta! sender="DodavatelC", id="130", type="Finish"
 	public void processFinishDodavatelC(MessageForm message) {
         message.setAddressee(Id.agentModelu);
-        message.setCode(Mc.mnozstvoDovez);
+        message.setCode(Mc.materialModel);
         notice(message);
     }
 
 	//meta! sender="DodavatelA", id="124", type="Finish"
 	public void processFinishDodavatelA(MessageForm message) {
         message.setAddressee(Id.agentModelu);
-        message.setCode(Mc.mnozstvoDovez);
+        message.setCode(Mc.materialModel);
         notice(message);
     }
 

@@ -39,15 +39,15 @@ public class Odoberanie extends Scheduler {
 
     }
 
-    //meta! sender="AgentOkolia", id="126", type="Start"
-    public void processStart(MessageForm message) {
+	//meta! sender="AgentOkolia", id="126", type="Start"
+	public void processStart(MessageForm message) {
         message.setCode(Mc.hold);
         //System.out.println("start odoberanie");
         hold(startTime, message);
     }
 
-    //meta! userInfo="Process messages defined in code", id="0"
-    public void processDefault(MessageForm message) {
+	//meta! userInfo="Process messages defined in code", id="0"
+	public void processDefault(MessageForm message) {
         switch (message.code()) {
             case Mc.hold:
                 MessageForm copy = message.createCopy();
@@ -55,7 +55,7 @@ public class Odoberanie extends Scheduler {
                 //odoslanie spravy mnozstva
 
                 MyMessage msg = (MyMessage) message;
-                msg.setMnozstvo(empiric.sample().doubleValue());
+                msg.setMnozstvo(-10/*empiric.sample().doubleValue() * (-1)*/);
                 //hold(time, copy);
 
                 if (message.deliveryTime() < endTime) {
@@ -72,21 +72,22 @@ public class Odoberanie extends Scheduler {
         }
     }
 
-    //meta! userInfo="Generated code: do not modify", tag="begin"
-    @Override
-    public void processMessage(MessageForm message
-    ) {
-        switch (message.code()) {
-            case Mc.start:
-                processStart(message);
-                break;
+	//meta! userInfo="Generated code: do not modify", tag="begin"
+	@Override
+	public void processMessage(MessageForm message)
+	{
+		switch (message.code())
+		{
+		case Mc.start:
+			processStart(message);
+		break;
 
-            default:
-                processDefault(message);
-                break;
-        }
-    }
-    //meta! tag="end"
+		default:
+			processDefault(message);
+		break;
+		}
+	}
+	//meta! tag="end"
 
     @Override
     public AgentOkolia myAgent() {

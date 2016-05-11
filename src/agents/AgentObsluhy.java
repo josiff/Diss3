@@ -72,14 +72,11 @@ public class AgentObsluhy extends Agent {
 	{
 		new ManagerObsluhy(Id.managerObsluhy, mySim(), this);
 		new PracovnaDobaNak1(Id.pracovnaDobaNak1, mySim(), this);
-		new PracovnaDobaVyk(Id.pracovnaDobaVyk, mySim(), this);
-		new PracovnaDobaNak2(Id.pracovnaDobaNak2, mySim(), this);
 		new ProcessNaklad(Id.processNaklad, mySim(), this);
 		new ProcessVyklad(Id.processVyklad, mySim(), this);
 		addOwnMessage(Mc.vyloz);
-		addOwnMessage(Mc.mnozDo);
+		addOwnMessage(Mc.materialObsluha);
 		addOwnMessage(Mc.initBagre);
-		addOwnMessage(Mc.mnozsOd);
 		addOwnMessage(Mc.naloz);
 	}
 	//meta! tag="end"

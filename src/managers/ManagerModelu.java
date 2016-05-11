@@ -41,18 +41,13 @@ public class ManagerModelu extends Manager {
     }
 
 	//meta! sender="AgentOkolia", id="144", type="Notice"
-	public void processMnozstvoDovez(MessageForm message) {
+	public void processMaterialModel(MessageForm message) {
         message.setAddressee(Id.agentStavby);
-        message.setCode(Mc.mnozDovez);
+        message.setCode(Mc.materialStavba);
         notice(message);
     }
 
-	//meta! sender="AgentOkolia", id="153", type="Notice"
-	public void processMnozOdob(MessageForm message) {
-        message.setAddressee(Id.agentStavby);
-        message.setCode(Mc.mnozOdo);
-        notice(message);
-    }
+	
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
 	public void init()
@@ -64,10 +59,6 @@ public class ManagerModelu extends Manager {
 	{
 		switch (message.code())
 		{
-		case Mc.mnozOdob:
-			processMnozOdob(message);
-		break;
-
 		case Mc.endRep:
 			processEndRep(message);
 		break;
@@ -76,8 +67,8 @@ public class ManagerModelu extends Manager {
 			processSpustenie(message);
 		break;
 
-		case Mc.mnozstvoDovez:
-			processMnozstvoDovez(message);
+		case Mc.materialModel:
+			processMaterialModel(message);
 		break;
 
 		default:

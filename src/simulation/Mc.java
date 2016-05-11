@@ -7,12 +7,9 @@ public class Mc extends IdList
 	//meta! userInfo="Generated code: do not modify", tag="begin"
 	public static final int initOko = 1013;
 	public static final int startRep = 1003;
-	public static final int mnozstvoDovez = 1025;
-	public static final int mnozDovez = 1026;
-	public static final int mnozDo = 1027;
-	public static final int mnozOdob = 1028;
-	public static final int mnozOdo = 1029;
-	public static final int mnozsOd = 1030;
+	public static final int materialModel = 1025;
+	public static final int materialStavba = 1026;
+	public static final int materialObsluha = 1027;
 	public static final int cestaBC = 1019;
 	public static final int cestaAB = 1008;
 	public static final int cestaCA = 1020;

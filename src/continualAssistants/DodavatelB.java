@@ -57,7 +57,7 @@ public class DodavatelB extends Scheduler {
                 //odoslanie spravy mnozstva
                 MyMessage msg = (MyMessage) message;
                // msg.setMnozstvo( empiric.sample().doubleValue());
-                msg.setCode(Mc.mnozstvoDovez);
+                
                 assistantFinished(msg);
 
                 hold(expo.sample(), copy);

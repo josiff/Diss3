@@ -55,8 +55,7 @@ public class DodavatelA extends Scheduler {
                 MessageForm copy = message.createCopy();
                 //odoslanie spravy mnozstva
                 MyMessage msg = (MyMessage) message;
-                msg.setMnozstvo(empiric.sample().doubleValue());
-                msg.setCode(Mc.mnozstvoDovez);
+                msg.setMnozstvo(empiric.sample().doubleValue());                
                 assistantFinished(msg);
 
                 hold(expo.sample(), copy);
