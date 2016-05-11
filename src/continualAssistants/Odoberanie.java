@@ -36,7 +36,6 @@ public class Odoberanie extends Scheduler {
         MySimulation sim = (MySimulation) mySim();
         startTime = 7 * 60.0;
         endTime = 22 * 60.0;
-        breakTime = (sim.DAY_HOUR - time - endTime) + startTime;
 
     }
 
@@ -57,16 +56,18 @@ public class Odoberanie extends Scheduler {
 
                 MyMessage msg = (MyMessage) message;
                 msg.setMnozstvo(empiric.sample().doubleValue());
-                hold(time, copy);
-                assistantFinished(msg);
+                //hold(time, copy);
 
-                /*if (message.deliveryTime() <= endTime) {
-                 hold(time, copy);
-                 } else {
-                 hold(breakTime, copy);
-                 endTime += sim.DAY_HOUR;
-                 System.out.println("koniec");
-                 }*/
+                if (message.deliveryTime() < endTime) {
+
+                    hold(time, copy);
+                } else {
+
+                    hold(9 * 60.0, copy);
+                    endTime += 24 * 60;
+                    // System.out.println("koniec");
+                }
+                assistantFinished(msg);
                 break;
         }
     }

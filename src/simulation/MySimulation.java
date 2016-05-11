@@ -14,6 +14,7 @@ public class MySimulation extends Simulation {
 
     private Random main;
     public double dayCount;
+  
 
     public final static double DAY_HOUR = 24 * 60;
 
