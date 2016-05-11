@@ -1,6 +1,9 @@
+package gui;
 
+import agents.AgentObsluhy;
 import agents.AgentOkolia;
 import agents.AgentStavby;
+import java.util.ArrayList;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
@@ -15,13 +18,10 @@ import javax.swing.table.TableModel;
  */
 public abstract class MyTableModel implements TableModel {
 
-    protected AgentStavby agentStavby;
-    protected AgentOkolia agentOkolia;
+    protected ArrayList<?> rows;
 
-    public MyTableModel(AgentStavby ag, AgentOkolia oko) {
-        agentStavby = ag;
-        agentOkolia = oko;
-
+    public MyTableModel(ArrayList<?> rows) {
+        this.rows = rows;
     }
 
     @Override
@@ -46,7 +46,8 @@ public abstract class MyTableModel implements TableModel {
     public void setValueAt(Object arg0, int arg1, int arg2) {
     }
 
-    
-  
+    public Object getRow(int rowIndex) {
+        return rows.get(rowIndex);
+    }
 
 }

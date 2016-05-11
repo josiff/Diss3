@@ -87,6 +87,10 @@ public class ManagerCiest extends Manager
 	{
 		switch (message.code())
 		{
+		case Mc.cestaBC:
+			processCestaBC(message);
+		break;
+
 		case Mc.cestaAB:
 			processCestaAB(message);
 		break;
@@ -98,22 +102,18 @@ public class ManagerCiest extends Manager
 		case Mc.finish:
 			switch (message.sender().id())
 			{
-			case Id.processCestaBC:
-				processFinishProcessCestaBC(message);
+			case Id.processCestaCA:
+				processFinishProcessCestaCA(message);
 			break;
 
 			case Id.processCestaAB:
 				processFinishProcessCestaAB(message);
 			break;
 
-			case Id.processCestaCA:
-				processFinishProcessCestaCA(message);
+			case Id.processCestaBC:
+				processFinishProcessCestaBC(message);
 			break;
 			}
-		break;
-
-		case Mc.cestaBC:
-			processCestaBC(message);
 		break;
 
 		default:

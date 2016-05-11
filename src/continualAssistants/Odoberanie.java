@@ -12,7 +12,11 @@ import agents.*;
 public class Odoberanie extends Scheduler {
 
     private EmpiricRNG empiric;
-    private double time = 0.5; //kazdych 30 min
+    private double time = 30; //kazdych 30 min
+
+    private double startTime;
+    private double endTime;
+    private double breakTime;
 
     public Odoberanie(int id, Simulation mySim, CommonAgent myAgent) {
         super(id, mySim, myAgent);
@@ -29,12 +33,18 @@ public class Odoberanie extends Scheduler {
     public void prepareReplication() {
         super.prepareReplication();
         // Setup component for the next replication
+        MySimulation sim = (MySimulation) mySim();
+        startTime = 7 * 60.0;
+        endTime = 22 * 60.0;
+        breakTime = (sim.DAY_HOUR - time - endTime) + startTime;
+
     }
 
     //meta! sender="AgentOkolia", id="126", type="Start"
     public void processStart(MessageForm message) {
         message.setCode(Mc.hold);
-        hold(time, message);
+        //System.out.println("start odoberanie");
+        hold(startTime, message);
     }
 
     //meta! userInfo="Process messages defined in code", id="0"
@@ -42,20 +52,29 @@ public class Odoberanie extends Scheduler {
         switch (message.code()) {
             case Mc.hold:
                 MessageForm copy = message.createCopy();
+                MySimulation sim = (MySimulation) mySim();
                 //odoslanie spravy mnozstva
-                MyMessage msg = (MyMessage) message;                
-                msg.setMnozstvo((int) empiric.sample());                
+
+                MyMessage msg = (MyMessage) message;
+                msg.setMnozstvo(empiric.sample().doubleValue());
+                hold(time, copy);
                 assistantFinished(msg);
 
-                hold(time, copy);
-
+                /*if (message.deliveryTime() <= endTime) {
+                 hold(time, copy);
+                 } else {
+                 hold(breakTime, copy);
+                 endTime += sim.DAY_HOUR;
+                 System.out.println("koniec");
+                 }*/
                 break;
         }
     }
 
     //meta! userInfo="Generated code: do not modify", tag="begin"
     @Override
-    public void processMessage(MessageForm message) {
+    public void processMessage(MessageForm message
+    ) {
         switch (message.code()) {
             case Mc.start:
                 processStart(message);

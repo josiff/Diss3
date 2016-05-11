@@ -12,19 +12,21 @@ import simulation.MySimulation;
  * @author Jožko
  */
 public class Main {
-    
-     /**
+
+    /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {      
-        
-         MySimulation sim = new MySimulation();
-         sim.simulate(1);
-        
-        
-         
-         
+    public static void main(String[] args) {
 
+        /*MySimulation sim = new MySimulation();
+         sim.simulate(1000);*/
+        new gui.Gui().setVisible(true);
+        
+        
+        
+        
+        
+        
     }
-    
+
 }

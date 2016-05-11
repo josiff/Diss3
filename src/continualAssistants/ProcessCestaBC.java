@@ -9,7 +9,6 @@ import OSPABA.Process;
 public class ProcessCestaBC extends Process {
 
     public final static double VZDIALENOST = 15;
-    
 
     public ProcessCestaBC(int id, Simulation mySim, CommonAgent myAgent) {
         super(id, mySim, myAgent);
@@ -23,7 +22,8 @@ public class ProcessCestaBC extends Process {
 
 	//meta! sender="AgentCiest", id="104", type="Start"
 	public void processStart(MessageForm message) {
-        
+        MyMessage msg = (MyMessage) message;
+        msg.getCar().setUsek("B->C");
         message.setCode(Mc.hold);
         hold(getProcessCest(message), message);
     }
@@ -32,6 +32,8 @@ public class ProcessCestaBC extends Process {
 	public void processDefault(MessageForm message) {
         switch (message.code()) {
             case Mc.hold:
+                MyMessage msg = (MyMessage) message;
+                
                 assistantFinished(message);
                 break;
         }
@@ -58,11 +60,11 @@ public class ProcessCestaBC extends Process {
     public AgentCiest myAgent() {
         return (AgentCiest) super.myAgent();
     }
-    
+
     private double getProcessCest(MessageForm message) {
 
         MyMessage msg = (MyMessage) message;
-        return  VZDIALENOST / msg.getCar().getRychlost() + msg.getCar().getDlzkuOpravy();
+        return VZDIALENOST / msg.getCar().getRychlost() *60.0 + msg.getCar().getDlzkuOpravy();
     }
 
 }

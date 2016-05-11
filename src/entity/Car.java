@@ -25,8 +25,11 @@ public class Car {
     private double nalozene;
     private double cena;
     private Random rnd;
+    private int pocet;
 
-    public Car(String typ, double rychlost, double pravPoruch, double oprava, int objem, double cena, Random seed) {
+    public static final int NEOBMEDZENE = -1;
+
+    public Car(String typ, double rychlost, double pravPoruch, double oprava, int objem, double cena, Random seed, int pocet) {
         this.typ = typ;
         this.rychlost = rychlost;
         this.pravPoruch = pravPoruch;
@@ -37,6 +40,22 @@ public class Car {
         this.nalozene = 0;
         this.cena = cena;
         this.rnd = new Random(seed.nextLong());
+        this.pocet = pocet;
+
+    }
+
+    public Car(Car car, Random seed) {
+        this.typ = car.getTyp();
+        this.rychlost = car.getRychlost();
+        this.pravPoruch = car.getPravPoruch();
+        this.oprava = car.getOprava();
+        this.objem = car.getObjem();
+        this.zacCakania = 0;
+        this.usek = "";
+        this.nalozene = 0;
+        this.cena = car.getCena();
+        this.rnd = new Random(seed.nextLong());
+        this.pocet = 1;
 
     }
 
@@ -158,11 +177,33 @@ public class Car {
 
         if (isPokazene()) {
 
-            return getOprava() /60.0;
+            return getOprava();
         } else {
             return 0.0;
         }
 
+    }
+
+    public double getCena() {
+        return cena;
+    }
+
+    public void setCena(double cena) {
+        this.cena = cena;
+    }
+
+    public int getPocet() {
+        return pocet;
+    }
+
+    public void setPocet(int pocet) {
+        this.pocet = pocet;
+    }
+
+    public void reset() {
+        this.zacCakania = 0;
+        this.usek = "";
+        this.nalozene = 0;
     }
 
 }

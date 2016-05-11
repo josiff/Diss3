@@ -3,8 +3,8 @@ package simulation;
 import OSPABA.*;
 import agents.*;
 import entity.Car;
-import entity.Nakladac;
-import entity.Vykladac;
+import entity.Bager;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,11 +12,10 @@ import java.util.Random;
 
 public class MySimulation extends Simulation {
 
-    public double sklad = 5000;
-    public double mnozstvo = sklad;
-    public double dovezene = sklad;
-
     private Random main;
+    public double dayCount;
+
+    public final static double DAY_HOUR = 24 * 60;
 
     public MySimulation() {
         main = new Random();
@@ -27,14 +26,14 @@ public class MySimulation extends Simulation {
     @Override
     public void prepareSimulation() {
         super.prepareSimulation();
-		// Create global statistcis
+        // Create global statistcis
 
     }
 
     @Override
     public void prepareReplication() {
         super.prepareReplication();
-		// Reset entities, queues, local statistics, etc...
+        // Reset entities, queues, local statistics, etc...
 
     }
 
@@ -42,6 +41,7 @@ public class MySimulation extends Simulation {
     public void replicationFinished() {
         // Collect local statistics into global, update UI, etc...
         super.replicationFinished();
+
     }
 
     @Override
@@ -51,56 +51,65 @@ public class MySimulation extends Simulation {
         System.out.println(this.currentTime());
     }
 
-	//meta! userInfo="Generated code: do not modify", tag="begin"
-	private void init()
-	{
-		setAgentModelu(new AgentModelu(Id.agentModelu, this, null));
-		setAgentStavby(new AgentStavby(Id.agentStavby, this, agentModelu()));
-		setAgentCiest(new AgentCiest(Id.agentCiest, this, agentStavby()));
-		setAgentObsluhy(new AgentObsluhy(Id.agentObsluhy, this, agentStavby()));
-		setAgentOkolia(new AgentOkolia(Id.agentOkolia, this, agentModelu()));
-	}
+    //meta! userInfo="Generated code: do not modify", tag="begin"
+    private void init() {
+        setAgentModelu(new AgentModelu(Id.agentModelu, this, null));
+        setAgentStavby(new AgentStavby(Id.agentStavby, this, agentModelu()));
+        setAgentCiest(new AgentCiest(Id.agentCiest, this, agentStavby()));
+        setAgentObsluhy(new AgentObsluhy(Id.agentObsluhy, this, agentStavby()));
+        setAgentOkolia(new AgentOkolia(Id.agentOkolia, this, agentModelu()));
+    }
 
-	private AgentModelu _agentModelu;
+    private AgentModelu _agentModelu;
 
-public AgentModelu agentModelu()
-	{ return _agentModelu; }
+    public AgentModelu agentModelu() {
+        return _agentModelu;
+    }
 
-	public void setAgentModelu(AgentModelu agentModelu)
-	{_agentModelu = agentModelu; }
+    public void setAgentModelu(AgentModelu agentModelu) {
+        _agentModelu = agentModelu;
+    }
 
-	private AgentStavby _agentStavby;
+    private AgentStavby _agentStavby;
 
-public AgentStavby agentStavby()
-	{ return _agentStavby; }
+    public AgentStavby agentStavby() {
+        return _agentStavby;
+    }
 
-	public void setAgentStavby(AgentStavby agentStavby)
-	{_agentStavby = agentStavby; }
+    public void setAgentStavby(AgentStavby agentStavby) {
+        _agentStavby = agentStavby;
+    }
 
-	private AgentCiest _agentCiest;
+    private AgentCiest _agentCiest;
 
-public AgentCiest agentCiest()
-	{ return _agentCiest; }
+    public AgentCiest agentCiest() {
+        return _agentCiest;
+    }
 
-	public void setAgentCiest(AgentCiest agentCiest)
-	{_agentCiest = agentCiest; }
+    public void setAgentCiest(AgentCiest agentCiest) {
+        _agentCiest = agentCiest;
+    }
 
-	private AgentObsluhy _agentObsluhy;
+    private AgentObsluhy _agentObsluhy;
 
-public AgentObsluhy agentObsluhy()
-	{ return _agentObsluhy; }
+    public AgentObsluhy agentObsluhy() {
+        return _agentObsluhy;
+    }
 
-	public void setAgentObsluhy(AgentObsluhy agentObsluhy)
-	{_agentObsluhy = agentObsluhy; }
+    public void setAgentObsluhy(AgentObsluhy agentObsluhy) {
+        _agentObsluhy = agentObsluhy;
+    }
 
-	private AgentOkolia _agentOkolia;
+    private AgentOkolia _agentOkolia;
 
-public AgentOkolia agentOkolia()
-	{ return _agentOkolia; }
+    public AgentOkolia agentOkolia() {
+        return _agentOkolia;
+    }
 
-	public void setAgentOkolia(AgentOkolia agentOkolia)
-	{_agentOkolia = agentOkolia; }
-	//meta! tag="end"
+    public void setAgentOkolia(AgentOkolia agentOkolia) {
+        _agentOkolia = agentOkolia;
+    }
+    //meta! tag="end"
 
     public Random getMain() {
         return main;

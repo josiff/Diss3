@@ -24,6 +24,11 @@ public class AgentModelu extends Agent
                 msg.setCode(Mc.initOko);
                 msg.setAddressee(this);
                 manager().notice(msg);
+                
+                MessageForm copy = msg.createCopy();
+                copy.setAddressee(this);
+                copy.setCode(Mc.initBag);
+                manager().notice(copy);
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -32,8 +37,8 @@ public class AgentModelu extends Agent
 		new ManagerModelu(Id.managerModelu, mySim(), this);
 		addOwnMessage(Mc.mnozOdob);
 		addOwnMessage(Mc.mnozstvoDovez);
-		addOwnMessage(Mc.spustenie);
 		addOwnMessage(Mc.endRep);
+		addOwnMessage(Mc.spustenie);
 	}
 	//meta! tag="end"
 }

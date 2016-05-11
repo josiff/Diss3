@@ -2,64 +2,53 @@ package simulation;
 
 import OSPABA.*;
 import entity.Car;
-import entity.Nakladac;
-import entity.Vykladac;
+import entity.Bager;
 
-public class MyMessage extends MessageForm
-{
-    
+public class MyMessage extends MessageForm {
+
     private Car car;
-    private Vykladac vykladac;
-    private Nakladac nakladac;
+    private Bager bager;
     private double mnozstvo;
-	public MyMessage(Simulation sim)
-	{
-		super(sim);
-	}
 
-	public MyMessage(MyMessage original)
-	{
-		super(original);
-		// copy() is called in superclass
-	}
+    public MyMessage(Simulation sim) {
+        super(sim);
+        mnozstvo = 0;
+    }
 
-	@Override
-	public MessageForm createCopy()
-	{
-		return new MyMessage(this);
-	}
+    public MyMessage(MyMessage original) {
+        super(original);
+        // copy() is called in superclass
+    }
 
-	@Override
-	protected void copy(MessageForm message)
-	{
-		super.copy(message);
-		MyMessage original = (MyMessage)message;
-		// Copy attributes
-                car = original.car;
-	}
+    @Override
+    public MessageForm createCopy() {
+        return new MyMessage(this);
+    }
+
+    @Override
+    protected void copy(MessageForm message) {
+        super.copy(message);
+        MyMessage original = (MyMessage) message;
+        // Copy attributes
+        car = original.car;
+        bager = original.bager;
+        mnozstvo = original.mnozstvo;
+    }
 
     public Car getCar() {
         return car;
-}
+    }
 
     public void setCar(Car car) {
         this.car = car;
     }
 
-    public Vykladac getVykladac() {
-        return vykladac;
+    public Bager getBager() {
+        return bager;
     }
 
-    public void setVykladac(Vykladac vykladac) {
-        this.vykladac = vykladac;
-    }
-
-    public Nakladac getNakladac() {
-        return nakladac;
-    }
-
-    public void setNakladac(Nakladac nakladac) {
-        this.nakladac = nakladac;
+    public void setBager(Bager bager) {
+        this.bager = bager;
     }
 
     public double getMnozstvo() {
@@ -69,10 +58,5 @@ public class MyMessage extends MessageForm
     public void setMnozstvo(double mnozstvo) {
         this.mnozstvo = mnozstvo;
     }
-    
-    
-    
-    
-        
-        
+
 }

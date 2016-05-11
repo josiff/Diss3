@@ -50,7 +50,7 @@ public class DodavatelC extends Scheduler {
 	//meta! sender="AgentOkolia", id="130", type="Start"
 	public void processStart(MessageForm message) {
         message.setCode(Mc.hold);
-        hold(expo.sample()/60.0, message);
+        hold(expo.sample() , message);
     }
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -60,11 +60,11 @@ public class DodavatelC extends Scheduler {
                 MessageForm copy = message.createCopy();
                 //odoslanie spravy mnozstva
                 MyMessage msg = (MyMessage) message;
-                msg.setMnozstvo((double) empiric.sample());
+                msg.setMnozstvo(empiric.sample().doubleValue());
                 msg.setCode(Mc.mnozstvoDovez);
                 assistantFinished(msg);
 
-                hold(expo.sample()/60.0, copy);
+                hold(expo.sample() , copy);
 
                 break;
 

@@ -34,12 +34,12 @@ public class AgentCiest extends Agent
 	private void init()
 	{
 		new ManagerCiest(Id.managerCiest, mySim(), this);
-		new ProcessCestaBC(Id.processCestaBC, mySim(), this);
-		new ProcessCestaCA(Id.processCestaCA, mySim(), this);
 		new ProcessCestaAB(Id.processCestaAB, mySim(), this);
+		new ProcessCestaCA(Id.processCestaCA, mySim(), this);
+		new ProcessCestaBC(Id.processCestaBC, mySim(), this);
 		addOwnMessage(Mc.cestaCA);
-		addOwnMessage(Mc.cestaAB);
 		addOwnMessage(Mc.cestaBC);
+		addOwnMessage(Mc.cestaAB);
 	}
 	//meta! tag="end"
 

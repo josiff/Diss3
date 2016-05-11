@@ -53,15 +53,16 @@ public class ManagerStavby extends Manager {
 
         MySimulation sim = (MySimulation) mySim();
         MyMessage msg = (MyMessage) message;
-        if (sim.dovezene > 0) {
+        //if (sim.dovezene > 0) {
             message.setAddressee(Id.agentCiest);
             message.setCode(Mc.cestaBC);
             request(message);
-        } else {
-            System.out.println(sim.currentTime());
-            System.out.println(msg.getCar().getTyp());
+        /*} else {
+           // System.out.println(sim.currentTime());
+           // System.out.println(msg.getCar().getTyp());
             sim.stopReplication();
-        }
+            
+        }*/
     }
 
 	//meta! sender="AgentModelu", id="15", type="Notice"
@@ -100,6 +101,14 @@ public class ManagerStavby extends Manager {
             notice(message);
 	}
 
+	//meta! sender="AgentModelu", id="167", type="Notice"
+	public void processInitBag(MessageForm message)
+	{
+            message.setCode(Mc.initBagre);
+            message.setAddressee(Id.agentObsluhy);
+            notice(message);
+	}
+
 	//meta! userInfo="Generated code: do not modify", tag="begin"
 	public void init()
 	{
@@ -114,28 +123,32 @@ public class ManagerStavby extends Manager {
 			processCestaBC(message);
 		break;
 
-		case Mc.mnozDovez:
-			processMnozDovez(message);
+		case Mc.startRep:
+			processStartRep(message);
 		break;
 
-		case Mc.cestaAB:
-			processCestaAB(message);
+		case Mc.initBag:
+			processInitBag(message);
 		break;
 
 		case Mc.cestaCA:
 			processCestaCA(message);
 		break;
 
-		case Mc.startRep:
-			processStartRep(message);
+		case Mc.cestaAB:
+			processCestaAB(message);
+		break;
+
+		case Mc.vyloz:
+			processVyloz(message);
 		break;
 
 		case Mc.mnozOdo:
 			processMnozOdo(message);
 		break;
 
-		case Mc.vyloz:
-			processVyloz(message);
+		case Mc.mnozDovez:
+			processMnozDovez(message);
 		break;
 
 		case Mc.naloz:

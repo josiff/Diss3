@@ -17,7 +17,9 @@ public class Mc extends IdList
 	public static final int cestaAB = 1008;
 	public static final int cestaCA = 1020;
 	public static final int naloz = 1009;
+	public static final int initBagre = 1031;
 	public static final int vyloz = 1010;
+	public static final int initBag = 1032;
 	public static final int spustenie = 1022;
 	public static final int endRep = 1024;
 	//meta! tag="end"

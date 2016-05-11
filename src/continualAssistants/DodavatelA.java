@@ -30,24 +30,22 @@ public class DodavatelA extends Scheduler {
                 new EmpiricPair(new DeterministicRNG(14.0), 0.14894),
                 new EmpiricPair(new DeterministicRNG(15.0), 0.16012),
                 new EmpiricPair(new DeterministicRNG(16.0), 0.11585));
-        
+
         expo = new ExponentialRNG(45.9, 0.999);
-        
-        
 
     }
 
     @Override
     public void prepareReplication() {
         super.prepareReplication();
-        
+
     }
 
 	//meta! sender="AgentOkolia", id="124", type="Start"
 	public void processStart(MessageForm message) {
         message.setCode(Mc.hold);
-        hold(expo.sample()/60.0, message);
-        
+        hold(expo.sample() , message);
+
     }
 
 	//meta! userInfo="Process messages defined in code", id="0"
@@ -57,12 +55,12 @@ public class DodavatelA extends Scheduler {
                 MessageForm copy = message.createCopy();
                 //odoslanie spravy mnozstva
                 MyMessage msg = (MyMessage) message;
-                msg.setMnozstvo((double)empiric.sample());
-                msg.setCode(Mc.mnozstvoDovez);                
+                msg.setMnozstvo(empiric.sample().doubleValue());
+                msg.setCode(Mc.mnozstvoDovez);
                 assistantFinished(msg);
-                
-                hold(expo.sample()/60.0, copy);
-                
+
+                hold(expo.sample(), copy);
+
                 break;
         }
     }

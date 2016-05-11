@@ -23,66 +23,69 @@ public class ManagerModelu extends Manager {
         }
     }
 
-    //meta! sender="AgentOkolia", id="113", type="Notice"
-    public void processSpustenie(MessageForm message) {
+	//meta! sender="AgentOkolia", id="113", type="Notice"
+	public void processSpustenie(MessageForm message) {
         message.setAddressee(Id.agentStavby);
         message.setCode(Mc.startRep);
         notice(message);
     }
 
-    //meta! sender="AgentStavby", id="119", type="Notice"
-    public void processEndRep(MessageForm message) {
+	//meta! sender="AgentStavby", id="119", type="Notice"
+	public void processEndRep(MessageForm message) {
     }
 
-    //meta! userInfo="Process messages defined in code", id="0"
-    public void processDefault(MessageForm message) {
+	//meta! userInfo="Process messages defined in code", id="0"
+	public void processDefault(MessageForm message) {
         switch (message.code()) {
         }
     }
 
-    //meta! sender="AgentOkolia", id="144", type="Notice"
-    public void processMnozstvoDovez(MessageForm message) {
+	//meta! sender="AgentOkolia", id="144", type="Notice"
+	public void processMnozstvoDovez(MessageForm message) {
         message.setAddressee(Id.agentStavby);
         message.setCode(Mc.mnozDovez);
         notice(message);
     }
 
-    //meta! sender="AgentOkolia", id="153", type="Notice"
-    public void processMnozOdob(MessageForm message) {
+	//meta! sender="AgentOkolia", id="153", type="Notice"
+	public void processMnozOdob(MessageForm message) {
         message.setAddressee(Id.agentStavby);
         message.setCode(Mc.mnozOdo);
         notice(message);
     }
 
-    //meta! userInfo="Generated code: do not modify", tag="begin"
-    public void init() {
-    }
+	//meta! userInfo="Generated code: do not modify", tag="begin"
+	public void init()
+	{
+	}
 
-    @Override
-    public void processMessage(MessageForm message) {
-        switch (message.code()) {
-            case Mc.mnozOdob:
-                processMnozOdob(message);
-                break;
+	@Override
+	public void processMessage(MessageForm message)
+	{
+		switch (message.code())
+		{
+		case Mc.mnozOdob:
+			processMnozOdob(message);
+		break;
 
-            case Mc.spustenie:
-                processSpustenie(message);
-                break;
+		case Mc.endRep:
+			processEndRep(message);
+		break;
 
-            case Mc.mnozstvoDovez:
-                processMnozstvoDovez(message);
-                break;
+		case Mc.spustenie:
+			processSpustenie(message);
+		break;
 
-            case Mc.endRep:
-                processEndRep(message);
-                break;
+		case Mc.mnozstvoDovez:
+			processMnozstvoDovez(message);
+		break;
 
-            default:
-                processDefault(message);
-                break;
-        }
-    }
-    //meta! tag="end"
+		default:
+			processDefault(message);
+		break;
+		}
+	}
+	//meta! tag="end"
 
     @Override
     public AgentModelu myAgent() {

@@ -4,6 +4,7 @@ import OSPABA.*;
 import simulation.*;
 import agents.*;
 import continualAssistants.*;
+import entity.Bager;
 
 //meta! id="6"
 public class ManagerObsluhy extends Manager {
@@ -60,6 +61,7 @@ public class ManagerObsluhy extends Manager {
 	//meta! sender="PracovnaDobaNak1", id="133", type="Finish"
 	public void processFinishPracovnaDobaNak1(MessageForm message)
 	{
+            
 	}
 
 	//meta! sender="PracovnaDobaNak2", id="137", type="Finish"
@@ -78,8 +80,9 @@ public class ManagerObsluhy extends Manager {
 	{
             MySimulation sim = (MySimulation) mySim();
             MyMessage msg = (MyMessage) message;
-            sim.mnozstvo += msg.getMnozstvo();
-            System.out.println("mnozstvo " + sim.mnozstvo);
+            
+            //System.out.println("mnozstvo " + sim.mnozstvo);
+            myAgent().mnozstvo += msg.getMnozstvo();
 	}
 
 	//meta! sender="AgentStavby", id="155", type="Notice"
@@ -87,9 +90,21 @@ public class ManagerObsluhy extends Manager {
 	{
             MySimulation sim = (MySimulation) mySim();
             MyMessage msg = (MyMessage) message;
-           // sim.mnozstvo -= msg.getMnozstvo();
-            System.out.println("odobrate " + msg.getMnozstvo());
+            myAgent().dovezene -= msg.getMnozstvo();
+          //  System.out.println("odobrate " + msg.getMnozstvo());
             
+	}
+
+	//meta! sender="AgentStavby", id="164", type="Notice"
+	public void processInitBagre(MessageForm message)
+	{
+            MyMessage msg;
+            for (Bager bager : myAgent().getBagre()) {
+                msg = (MyMessage) message.createCopy();
+                msg.setBager(bager);
+                msg.setAddressee(Id.pracovnaDobaNak1);
+                startContinualAssistant(msg);
+            }
 	}
 
 	//meta! userInfo="Generated code: do not modify", tag="begin"
@@ -102,13 +117,13 @@ public class ManagerObsluhy extends Manager {
 	{
 		switch (message.code())
 		{
+		case Mc.mnozsOd:
+			processMnozsOd(message);
+		break;
+
 		case Mc.finish:
 			switch (message.sender().id())
 			{
-			case Id.pracovnaDobaNak1:
-				processFinishPracovnaDobaNak1(message);
-			break;
-
 			case Id.pracovnaDobaNak2:
 				processFinishPracovnaDobaNak2(message);
 			break;
@@ -117,30 +132,34 @@ public class ManagerObsluhy extends Manager {
 				processFinishProcessVyklad(message);
 			break;
 
-			case Id.processNaklad:
-				processFinishProcessNaklad(message);
+			case Id.pracovnaDobaNak1:
+				processFinishPracovnaDobaNak1(message);
 			break;
 
 			case Id.pracovnaDobaVyk:
 				processFinishPracovnaDobaVyk(message);
 			break;
+
+			case Id.processNaklad:
+				processFinishProcessNaklad(message);
+			break;
 			}
 		break;
 
-		case Mc.mnozsOd:
-			processMnozsOd(message);
+		case Mc.mnozDo:
+			processMnozDo(message);
 		break;
 
 		case Mc.vyloz:
 			processVyloz(message);
 		break;
 
-		case Mc.naloz:
-			processNaloz(message);
+		case Mc.initBagre:
+			processInitBagre(message);
 		break;
 
-		case Mc.mnozDo:
-			processMnozDo(message);
+		case Mc.naloz:
+			processNaloz(message);
 		break;
 
 		default:

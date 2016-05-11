@@ -19,6 +19,7 @@ public class ProcessCestaAB extends Process {
     public void prepareReplication() {
         super.prepareReplication();
         // Setup component for the next replication
+        lastTime = 0;
 
     }
 
@@ -28,6 +29,7 @@ public class ProcessCestaAB extends Process {
         MyMessage msg = (MyMessage) message;
         myAgent().getPoradieAB().addLast(msg.getCar());
         msg.setCode(Mc.hold);
+        msg.getCar().setUsek("A->B");
         double d = getProcessCest(msg);
         hold(d, msg);
 
@@ -70,7 +72,7 @@ public class ProcessCestaAB extends Process {
     private double getProcessCest(MessageForm message) {
 
         MyMessage msg = (MyMessage) message;
-        double d = VZDIALENOST / msg.getCar().getRychlost() + msg.deliveryTime();
+        double d = VZDIALENOST / msg.getCar().getRychlost() * 60.0 + msg.deliveryTime();
         lastTime = lastTime < d  ? d : lastTime;
         return lastTime - msg.deliveryTime();
         

@@ -1,4 +1,6 @@
+package gui;
 
+import agents.AgentObsluhy;
 import agents.AgentOkolia;
 import agents.AgentStavby;
 import entity.Car;
@@ -19,17 +21,17 @@ public class CarTableModel extends MyTableModel {
     final int objem = 1;
     final int nalozene = 2;
     final int rychlost = 3;
-    private ArrayList<Car> cars;
+    final int usek = 4;
+    final int pocet = 5;
+    final int cena = 6;
 
-    public CarTableModel(AgentStavby ag, AgentOkolia oko) {
-        super(ag, oko);
-        cars = new ArrayList(oko.getGarage().values());
-
+    public CarTableModel(ArrayList<Car> rows) {
+        super(rows);
     }
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 7;
     }
 
     @Override
@@ -37,12 +39,23 @@ public class CarTableModel extends MyTableModel {
         switch (columnIndex) {
             case typ:
                 return "Typ";
+
             case objem:
                 return "Objem";
+
             case nalozene:
                 return "Naložené";
+
             case rychlost:
                 return "Rýchlosť";
+
+            case usek:
+                return "Úsek";
+            case pocet:
+                return "Počet";
+            case cena:
+                return "Cena";
+
         }
         return null;
     }
@@ -50,7 +63,7 @@ public class CarTableModel extends MyTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
 
-        Car car = cars.get(rowIndex);
+        Car car = (Car) rows.get(rowIndex);
 
         switch (columnIndex) {
             case typ:
@@ -61,6 +74,12 @@ public class CarTableModel extends MyTableModel {
                 return car.getNalozene();
             case rychlost:
                 return car.getRychlost();
+            case usek:
+                return car.getUsek();
+            case pocet:
+                return car.getPocet() <= Car.NEOBMEDZENE ? "neobmedzene" : car.getPocet();
+            case cena:
+                return car.getCena();
         }
         return null;
 
@@ -68,7 +87,11 @@ public class CarTableModel extends MyTableModel {
 
     @Override
     public int getRowCount() {
-        return cars.size();
+        return rows.size();
     }
+
+   
+
+    
 
 }

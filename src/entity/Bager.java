@@ -14,19 +14,26 @@ import simulation.MySimulation;
  *
  * @author Jožko
  */
-public class Nakladac {
+public class Bager {
 
     private double vykon;
     private double start;
     private double end;
     private boolean obsadeny;
     private double cena;
+    private int typ;
+    private boolean aktivny;
+    
+    public static final int NAKLADAC = 1;
+    public static final int VYKLADAC = 2;
 
-    public Nakladac(double vykon, double start, double end, double cena) {
+    public Bager(double vykon, double start, double end, double cena, int typ) {
         this.vykon = vykon;
         this.start = start;
         this.end = end;
         this.cena = cena;
+        this.typ = typ;
+        this.aktivny = false;
     }
 
     public double getVykon() {
@@ -68,6 +75,24 @@ public class Nakladac {
     public void setCena(double cena) {
         this.cena = cena;
     }
+
+    public int getTyp() {
+        return typ;
+    }
+
+    public void setTyp(int typ) {
+        this.typ = typ;
+    }
+
+    public boolean isAktivny() {
+        return aktivny;
+    }
+
+    public void setAktivny(boolean aktivny) {
+        this.aktivny = aktivny;
+    }
+    
+    
     
      
     

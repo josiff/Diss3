@@ -5,8 +5,8 @@ import OSPDataStruct.SimQueue;
 import simulation.*;
 import managers.*;
 import continualAssistants.*;
-import entity.Nakladac;
-import entity.Vykladac;
+import entity.Bager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,23 +16,39 @@ public class AgentObsluhy extends Agent {
     private SimQueue< MyMessage> radNakladac;
     private SimQueue< MyMessage> radVykladac;
 
-    private List<Nakladac> nakladace;
-    private List<Vykladac> vykladace;
+    private ArrayList<Bager> bagre;
+   
     
     private double kapacitaB;
     private double mnozstvoB;
+    
+    
+    public double skladA;
+    public double skladB;
+    public double mnozstvo;
+    public double dovezene;
+    
+    
+    
 
     public AgentObsluhy(int id, Simulation mySim, Agent parent) {
         super(id, mySim, parent);
+        bagre = new ArrayList<>();        
+        iniBagre();
         init();
         addOwnMessage(Mc.hold);
         
         kapacitaB = 10000;
-        mnozstvoB = kapacitaB;
-        nakladace = new ArrayList<>();
-        vykladace = new ArrayList<>();
-        initNakladace();
-        iniVykladace();
+        skladA = 3500;
+        skladB = 1300;
+        
+       
+        
+        
+        
+        
+        
+        
     }
 
     @Override
@@ -41,6 +57,13 @@ public class AgentObsluhy extends Agent {
         // Setup component for the next replication
         radNakladac = new SimQueue<>();
         radVykladac = new SimQueue<>();
+        mnozstvoB = kapacitaB;
+        mnozstvo = skladA;
+        dovezene = skladB;
+        for (Bager bager : bagre) {
+            bager.setObsadeny(false);
+            bager.setAktivny(false);
+        }
 
     }
 
@@ -48,13 +71,14 @@ public class AgentObsluhy extends Agent {
 	private void init()
 	{
 		new ManagerObsluhy(Id.managerObsluhy, mySim(), this);
+		new PracovnaDobaNak1(Id.pracovnaDobaNak1, mySim(), this);
 		new PracovnaDobaVyk(Id.pracovnaDobaVyk, mySim(), this);
 		new PracovnaDobaNak2(Id.pracovnaDobaNak2, mySim(), this);
 		new ProcessNaklad(Id.processNaklad, mySim(), this);
-		new PracovnaDobaNak1(Id.pracovnaDobaNak1, mySim(), this);
 		new ProcessVyklad(Id.processVyklad, mySim(), this);
 		addOwnMessage(Mc.vyloz);
 		addOwnMessage(Mc.mnozDo);
+		addOwnMessage(Mc.initBagre);
 		addOwnMessage(Mc.mnozsOd);
 		addOwnMessage(Mc.naloz);
 	}
@@ -68,21 +92,20 @@ public class AgentObsluhy extends Agent {
         return radVykladac;
     }
 
-    private void initNakladace() {
-        nakladace.add(new Nakladac(180, 7, 18, 0));
-        //nakladace.add(new Nakladac(250, 9, 22, 0));
+    private void iniBagre() {
+        bagre.add(new Bager(180, 7*60.0, 18*60.0, 0, Bager.NAKLADAC));
+        bagre.add(new Bager(250, 9*60.0, 22*60.0, 0, Bager.NAKLADAC));
+        
+        
+        bagre.add(new Bager(190, 9.5*60.0, 22*60.0, 0, Bager.VYKLADAC));
     }
 
-    private void iniVykladace() {
-        vykladace.add(new Vykladac(200, 7, 22, 0));
+    
+
+    public ArrayList<Bager> getBagre() {
+        return bagre;
     }
 
-    public List<Nakladac> getNakladace() {
-        return nakladace;
-    }
-
-    public List<Vykladac> getVykladace() {
-        return vykladace;
-    }
+   
 
 }

@@ -19,12 +19,15 @@ public class ProcessCestaCA extends Process {
     public void prepareReplication() {
         super.prepareReplication();
         // Setup component for the next replication
+        lastTime = 0;
 
     }
 
 	//meta! sender="AgentCiest", id="106", type="Start"
 	public void processStart(MessageForm message) {
         MyMessage msg = (MyMessage) message;
+         
+        msg.getCar().setUsek("C->A");
         myAgent().getPoradieCA().addLast(msg.getCar());
         msg.setCode(Mc.hold);
         double d = getProcessCest(msg);
@@ -68,7 +71,7 @@ public class ProcessCestaCA extends Process {
     private double getProcessCest(MessageForm message) {
 
         MyMessage msg = (MyMessage) message;
-        double d = VZDIALENOST / msg.getCar().getRychlost() + msg.deliveryTime() ;
+        double d = VZDIALENOST / msg.getCar().getRychlost() *60.0 + msg.deliveryTime() ;
         lastTime = lastTime < d  ? d : lastTime;
         return lastTime -  msg.deliveryTime();
         //return d - msg.deliveryTime();
