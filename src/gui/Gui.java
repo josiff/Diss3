@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.SingleSelectionModel;
 import javax.swing.table.TableModel;
+import simulation.MyMessage;
 import simulation.MySimulation;
 
 /*
@@ -24,8 +25,6 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
 
     private MySimulation sim;
 
-    
-
     /**
      * Creates new form Gui
      */
@@ -37,7 +36,7 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
         MyTableModel modelCar = new CarTableModel(sim.agentOkolia().getVariantCar());
         tableCar.setModel(modelCar);
 
-        MyTableModel modelBag = new BagreTableModel(sim.agentObsluhy().getBagre());
+        MyTableModel modelBag = new BagreTableModel(sim.agentObsluhy().getBagreInit());
         tableBagre.setModel(modelBag);
 
         MyTableModel modelGarage = new CarTableModel(new ArrayList<>(sim.agentOkolia().getGarage().values()));
@@ -45,6 +44,12 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
 
         MyTableModel modelVariant = new CarTableModel(sim.agentOkolia().getVariantCar());
         tableVariant.setModel(modelVariant);
+
+        MyTableModel modelBagGarage = new BagreTableModel(sim.agentObsluhy().getBagreGarage());
+        tableBagreGarag.setModel(modelBagGarage);
+
+        MyTableModel modelBagInit = new BagreTableModel(sim.agentObsluhy().getBagreInit());
+        tableBagreInit.setModel(modelBagInit);
 
         sim.registerDelegate(this);
 
@@ -93,6 +98,21 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
         tableVariant = new javax.swing.JTable();
         btnAddCar = new javax.swing.JButton();
         btnDelCar = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        lblCenaCar = new javax.swing.JLabel();
+        lblCountCar = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableBagreGarag = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tableBagreInit = new javax.swing.JTable();
+        btnAddBager = new javax.swing.JButton();
+        btnDelBager = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        lblCountBagre = new javax.swing.JLabel();
+        lblCenaBagre = new javax.swing.JLabel();
         lblDay = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -248,23 +268,37 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
             }
         });
 
+        jLabel10.setText("Počet");
+
+        jLabel11.setText("Cena");
+
+        lblCenaCar.setText("0");
+
+        lblCountCar.setText("0");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(329, 329, 329)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblCountCar))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblCenaCar)))
+                        .addGap(276, 276, 276)
                         .addComponent(btnAddCar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDelCar))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -273,15 +307,125 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
                 .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddCar)
-                    .addComponent(btnDelCar))
-                .addGap(14, 14, 14)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAddCar)
+                        .addComponent(btnDelCar))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(lblCountCar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(lblCenaCar))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Nastavenie vozidiel", jPanel3);
+
+        tableBagreGarag.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tableBagreGarag);
+
+        tableBagreInit.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(tableBagreInit);
+
+        btnAddBager.setText("Pridaj");
+        btnAddBager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddBagerActionPerformed(evt);
+            }
+        });
+
+        btnDelBager.setText("Odober");
+        btnDelBager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelBagerActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Počet");
+
+        jLabel9.setText("Cena");
+
+        lblCountBagre.setText("0");
+
+        lblCenaBagre.setText("0");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblCountBagre))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblCenaBagre)))
+                        .addGap(119, 119, 119)
+                        .addComponent(btnAddBager)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDelBager))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
+                        .addComponent(jScrollPane6)))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAddBager)
+                            .addComponent(btnDelBager)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(lblCountBagre))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(lblCenaBagre))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Bagre", jPanel2);
 
         lblDay.setText("day");
 
@@ -339,9 +483,7 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
                                         .addComponent(btnPause)
                                         .addGap(6, 6, 6)
                                         .addComponent(btnStop))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtReplikacie)))
+                                    .addComponent(txtReplikacie))
                                 .addGap(78, 78, 78)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(slidInterval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -370,9 +512,8 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtReplikacie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnPause)
-                        .addComponent(btnStop))
+                    .addComponent(btnPause)
+                    .addComponent(btnStop)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(6, 6, 6)
@@ -414,14 +555,15 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
         if (sim.isPaused()) {
             sim.resumeSimulation();
         } else {
-            
+
             sim.dayCount = -1;
             if (checkSimulacia.isSelected()) {
                 setSimSpeed();
             } else {
                 sim.setMaxSimSpeed();
             }
-            sim.simulateAsync(Integer.parseInt(txtReplikacie.getText()));
+
+            sim.simulateAsync(Integer.parseInt(txtReplikacie.getText()), 18 * 30 * 24 * 60);
 
         }
     }//GEN-LAST:event_btnStartActionPerformed
@@ -458,6 +600,8 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
     private void btnAddCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCarActionPerformed
         MyTableModel model = (MyTableModel) tableGarage.getModel();
         Car car = (Car) model.getRow(tableGarage.getSelectedRow());
+        lblCenaCar.setText(String.valueOf(Double.parseDouble(lblCenaCar.getText()) + car.getCena()));
+        lblCenaCar.setText(String.valueOf(Double.parseDouble(lblCountCar.getText()) + 1));
         sim.agentOkolia().addToVariantCar(car);
         tableVariant.updateUI();
         refreshTable();
@@ -468,10 +612,32 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
     private void btnDelCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelCarActionPerformed
         MyTableModel model = (MyTableModel) tableVariant.getModel();
         Car car = (Car) model.getRow(tableVariant.getSelectedRow());
+        lblCenaCar.setText(String.valueOf(Double.parseDouble(lblCenaCar.getText()) - car.getCena()));
+        lblCenaCar.setText(String.valueOf(Double.parseDouble(lblCountCar.getText()) - 1));
         sim.agentOkolia().removeVariantCar(car);
         tableVariant.updateUI();
         refreshTable();
     }//GEN-LAST:event_btnDelCarActionPerformed
+
+    private void btnAddBagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBagerActionPerformed
+        MyTableModel model = (MyTableModel) tableBagreGarag.getModel();
+        Bager bager = (Bager) model.getRow(tableBagreGarag.getSelectedRow());
+        lblCenaBagre.setText(String.valueOf(Double.parseDouble(lblCenaBagre.getText()) + bager.getCena()));
+        lblCenaBagre.setText(String.valueOf(Double.parseDouble(lblCountBagre.getText()) + 1));
+        sim.agentObsluhy().addToBagreInit(bager);
+        tableBagreInit.updateUI();
+        refreshTable();
+    }//GEN-LAST:event_btnAddBagerActionPerformed
+
+    private void btnDelBagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelBagerActionPerformed
+        MyTableModel model = (MyTableModel) tableBagreInit.getModel();
+        Bager bager = (Bager) model.getRow(tableBagreInit.getSelectedRow());
+        lblCenaBagre.setText(String.valueOf(Double.parseDouble(lblCenaBagre.getText()) - bager.getCena()));
+        lblCenaBagre.setText(String.valueOf(Double.parseDouble(lblCountBagre.getText()) - 1));
+        sim.agentObsluhy().removeBagreInit(bager);
+        tableBagreInit.updateUI();
+        refreshTable();
+    }//GEN-LAST:event_btnDelBagerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -509,28 +675,41 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddBager;
     private javax.swing.JButton btnAddCar;
+    private javax.swing.JButton btnDelBager;
     private javax.swing.JButton btnDelCar;
     private javax.swing.JButton btnPause;
     private javax.swing.JButton btnStart;
     private javax.swing.JButton btnStop;
     private javax.swing.JCheckBox checkSimulacia;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblAktRep;
+    private javax.swing.JLabel lblCenaBagre;
+    private javax.swing.JLabel lblCenaCar;
+    private javax.swing.JLabel lblCountBagre;
+    private javax.swing.JLabel lblCountCar;
     private javax.swing.JLabel lblDay;
     private javax.swing.JLabel lblSkladA;
     private javax.swing.JLabel lblSkladB;
@@ -538,6 +717,8 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
     private javax.swing.JSlider slidDuration;
     private javax.swing.JSlider slidInterval;
     private javax.swing.JTable tableBagre;
+    private javax.swing.JTable tableBagreGarag;
+    private javax.swing.JTable tableBagreInit;
     private javax.swing.JTable tableCar;
     private javax.swing.JTable tableGarage;
     private javax.swing.JTable tableVariant;
@@ -550,13 +731,17 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
         switch (ss) {
             case running:
 
+                //lblTime.setText(String.valueOf(smltn.currentTime()/60.0));
                 break;
             case paused:
-                lblTime.setText(getTime(smltn.currentTime()));
+                //lblTime.setText(String.valueOf(smltn.currentTime()/60.0));
                 break;
             case replicationStopped:
-                lblTime.setText(getTime(smltn.currentTime()));
+                //lblTime.setText(String.valueOf((smltn.currentTime()/60.0)));
                 lblAktRep.setText(String.valueOf(smltn.currentReplication()));
+                break;
+            case replicationRunning:
+                //lblTime.setText(String.valueOf(smltn.currentTime()/60.0));
                 break;
 
         }
@@ -565,10 +750,10 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
 
     @Override
     public void refresh(Simulation smltn) {
+
         lblTime.setText(getTime(sim.currentTime()));
         lblAktRep.setText(String.valueOf(smltn.currentReplication()));
-        lblDay.setText(String.valueOf(sim.dayCount + 1 ));
-        
+        lblDay.setText(String.valueOf(sim.dayCount + 1));
 
         tableCar.invalidate();
         tableCar.repaint();
@@ -578,8 +763,6 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
         MySimulation sim = (MySimulation) smltn;
         lblSkladA.setText(String.valueOf(sim.agentObsluhy().mnozstvo));
         lblSkladB.setText(String.valueOf(sim.agentObsluhy().dovezene));
-        
-        
 
     }
 
@@ -592,8 +775,6 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
     private String getTime(double aktualnyCas) {
         if ((aktualnyCas > (sim.DAY_HOUR * (sim.dayCount + 1)))) {
             sim.dayCount++;
-            
-            
 
         }
         aktualnyCas -= sim.dayCount * sim.DAY_HOUR;
@@ -621,6 +802,12 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
 
         tableVariant.invalidate();
         tableVariant.repaint();
+        
+        tableBagreGarag.invalidate();
+        tableBagreGarag.repaint();
+        
+        tableBagreInit.invalidate();
+        tableBagreInit.repaint();
 
     }
 }

@@ -55,7 +55,7 @@ public class Car {
         this.nalozene = 0;
         this.cena = car.getCena();
         this.rnd = new Random(seed.nextLong());
-        this.pocet = 1;
+        this.pocet = pocet;
 
     }
 

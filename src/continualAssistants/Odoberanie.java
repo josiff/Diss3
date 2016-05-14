@@ -34,8 +34,9 @@ public class Odoberanie extends Scheduler {
         super.prepareReplication();
         // Setup component for the next replication
         MySimulation sim = (MySimulation) mySim();
-        startTime = 7 * 60.0;
+        startTime = 9 * 60.0;
         endTime = 22 * 60.0;
+        breakTime = 9*60.0;
 
     }
 
@@ -55,7 +56,7 @@ public class Odoberanie extends Scheduler {
                 //odoslanie spravy mnozstva
 
                 MyMessage msg = (MyMessage) message;
-                msg.setMnozstvo(-10/*empiric.sample().doubleValue() * (-1)*/);
+                msg.setMnozstvo(-empiric.sample().doubleValue());
                 //hold(time, copy);
 
                 if (message.deliveryTime() < endTime) {
@@ -63,8 +64,8 @@ public class Odoberanie extends Scheduler {
                     hold(time, copy);
                 } else {
 
-                    hold(9 * 60.0, copy);
-                    endTime += 24 * 60;
+                    hold(breakTime, copy);
+                    endTime += sim.DAY_HOUR;//24 * 60;
                     // System.out.println("koniec");
                 }
                 assistantFinished(msg);

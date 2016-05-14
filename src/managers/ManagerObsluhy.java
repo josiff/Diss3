@@ -69,17 +69,26 @@ public class ManagerObsluhy extends Manager {
         MyMessage msg = (MyMessage) message;
 
         //System.out.println("mnozstvo " + sim.mnozstvo);
-        if (msg.getMnozstvo() > 0) {
+        if (msg.getMnozstvo() >= 0) {
             myAgent().mnozstvo += msg.getMnozstvo();
         } else {
-            myAgent().dovezene += msg.getMnozstvo();
+            //odoberam pozadovane mnozstvo a ak nie je tak minimum
+            if (myAgent().ciastocneVyloz != null) {
+                MyMessage msgRad = (MyMessage) myAgent().ciastocneVyloz;
+                myAgent().ciastocneVyloz = null;
+                msgRad.setAddressee(Id.processVyklad);
+                startContinualAssistant(msgRad);
+                
+            }
+            myAgent().dovezene += Math.min(myAgent().dovezene, msg.getMnozstvo());
+
         }
     }
 
     //meta! sender="AgentStavby", id="164", type="Notice"
     public void processInitBagre(MessageForm message) {
         MyMessage msg;
-        for (Bager bager : myAgent().getBagre()) {
+        for (Bager bager : myAgent().getBagreInit()) {
             msg = (MyMessage) message.createCopy();
             msg.setBager(bager);
             msg.setAddressee(Id.pracovnaDobaNak1);

@@ -36,6 +36,10 @@ public class Bager {
         this.aktivny = false;
     }
 
+    public Bager(Bager bager) {
+        this(bager.getVykon(), bager.getStart(), bager.getEnd(), bager.getCena(), bager.getTyp());
+    }
+
     public double getVykon() {
         return vykon;
     }
