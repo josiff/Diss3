@@ -81,7 +81,7 @@ public class TestVariantov {
                                     cena = (sim.agentOkolia().getCena() + sim.agentObsluhy().getCena());
                                     if (cena < najCena) {
                                         sim.setMaxSimSpeed();
-                                        sim.simulate(10, (18 * 30 * 24 * 60));
+                                        sim.simulate(20, (18 * 30 * 24 * 60));
                                         odobranie = sim.celkoveOdobratie.mean();
 
                                         if (odobranie >= 0.9) {

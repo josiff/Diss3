@@ -1,5 +1,6 @@
 package gui;
 
+import OSPABA.Simulation;
 import agents.AgentObsluhy;
 import agents.AgentOkolia;
 import agents.AgentStavby;
@@ -24,14 +25,18 @@ public class CarTableModel extends MyTableModel {
     final int usek = 4;
     final int pocet = 5;
     final int cena = 6;
+    final int cakanie = 7;
+    
+    private Simulation sim;
 
-    public CarTableModel(ArrayList<Car> rows) {
+    public CarTableModel(ArrayList<Car> rows, Simulation sim) {
         super(rows);
+        this.sim = sim;
     }
 
     @Override
     public int getColumnCount() {
-        return 7;
+        return 8;
     }
 
     @Override
@@ -55,6 +60,8 @@ public class CarTableModel extends MyTableModel {
                 return "Počet";
             case cena:
                 return "Cena";
+            case cakanie:
+                return "Čakanie";
 
         }
         return null;
@@ -71,7 +78,7 @@ public class CarTableModel extends MyTableModel {
             case objem:
                 return car.getObjem();
             case nalozene:
-                return car.getNalozene();
+                return String.format("%.2f", car.getAktStav(sim.currentTime())) + "%";
             case rychlost:
                 return car.getRychlost();
             case usek:
@@ -80,6 +87,8 @@ public class CarTableModel extends MyTableModel {
                 return car.getPocet() <= Car.NEOBMEDZENE ? "neobmedzene" : car.getPocet();
             case cena:
                 return car.getCena();
+            case cakanie:
+                return car.getZacCakania();
         }
         return null;
 

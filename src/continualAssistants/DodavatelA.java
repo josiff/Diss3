@@ -13,6 +13,7 @@ public class DodavatelA extends Scheduler {
 
     private EmpiricRNG empiric; // mnozstvo
     private ExponentialRNG expo; //datumy
+    private double THRE_MONTHS = 3 * 30 * 24 * 60;
 
     public DodavatelA(int id, Simulation mySim, CommonAgent myAgent) {
         super(id, mySim, myAgent);
@@ -58,8 +59,16 @@ public class DodavatelA extends Scheduler {
                 MyMessage msg = (MyMessage) message;
                 msg.setMnozstvo(empiric.sample().doubleValue());
                 assistantFinished(msg);
+                if (myAgent().vypnutieA) {
 
-                hold(expo.sample(), copy);
+                    if (mySim().currentTime() < THRE_MONTHS) {
+                        hold(expo.sample(), copy);
+                    } else {
+                        System.out.println("doda");
+                    }
+                } else {
+                    hold(expo.sample(), copy);
+                }
 
                 break;
         }

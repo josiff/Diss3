@@ -33,6 +33,10 @@ public class ProcessVyklad extends Process {
         MyMessage msg = (MyMessage) message;
         Bager vyk = null;
 
+        //if (msg.getCar().getZacCakania() == 0) {
+            msg.getCar().setZacCakania(mySim().currentTime());
+       // }
+
         obsadeny = true;
         for (Bager bager : myAgent().getBagreInit()) {
 
@@ -57,15 +61,27 @@ public class ProcessVyklad extends Process {
 
         if (obsadeny) {
             myAgent().getRadVykladac().add(msg);
+            myAgent().stpocetPredVyk.addSample(myAgent().getRadVykladac().size());
+            myAgent().stpocetPredVyk.setPoslZmena(mySim().currentTime());
             msg.getCar().setUsek("čakanie vykladač");
+            if (vyk == null) {
+                msg.getCar().setZacCakania(0);
+                msg.getCar().setUsek("Nocovanie vykl");
+            }
 
         } else {
-            
+
             vyk.setObsadeny(true);
             msg.setBager(vyk);
             if (checkKapacita(message)) {
+                myAgent().cakanieVykladac.addSample(mySim().currentTime() - msg.getCar().getZacCakania());
+                msg.getCar().setZacCakania(0);
+
                 msg.getCar().setUsek("vykladanie");
                 message.setCode(Mc.hold);
+                double d = getProcessVyklad(message);
+                msg.getCar().setStartObsluhy(mySim().currentTime());
+                msg.getCar().setEndObsluhy(d + mySim().currentTime());
                 hold(getProcessVyklad(message), message);
             }
         }
@@ -88,9 +104,16 @@ public class ProcessVyklad extends Process {
                     /*kontrola ci neprekrocim kapacitu*/
                     msgRad.setBager(msg.getBager());
                     if (checkKapacita(msgRad)) {
+
+                        myAgent().cakanieVykladac.addSample(mySim().currentTime() - msgRad.getCar().getZacCakania());
+                        msgRad.getCar().setZacCakania(0);
+
                         msgRad.getCar().setUsek("vykladanie");
                         msgRad.setCode(Mc.hold);
-                        hold(getProcessVyklad(msgRad), msgRad);
+                        double d = getProcessVyklad(msgRad);
+                        msg.getCar().setStartObsluhy(mySim().currentTime());
+                        msg.getCar().setEndObsluhy(d + mySim().currentTime());
+                        hold(d, msgRad);
                     }
                 } else {
                     msg.getBager().setObsadeny(false);
@@ -130,6 +153,10 @@ public class ProcessVyklad extends Process {
     private double getProcessVyklad(MessageForm message, double objem) {
         MyMessage msg = (MyMessage) message;
 
+        msg.getBager().getVytazenie().addValue(1);
+        msg.getBager().getVytazenie().setCount(myAgent().vytazVykl);
+
+        myAgent().vytazVykl++;
         return objem / msg.getBager().getVykon() * 60.0;
     }
 
@@ -144,6 +171,7 @@ public class ProcessVyklad extends Process {
             if (objem == 0) {
                 //msg.getCar().setUsek("cakanie vykladac");
                 myAgent().ciastocneVyloz = msg;
+
             } else {
                 msg.setAddressee(Id.processVyklad);
                 msg.setCode(Mc.start);

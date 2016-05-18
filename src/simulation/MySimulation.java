@@ -20,6 +20,12 @@ public class MySimulation extends Simulation {
     public Stat mnozA;
     public Stat mnozB;
     public Stat celkoveOdobratie;
+    public Stat celkoveCakanieNak;
+    public Stat celkoveCakanieVyk;
+    public Stat celkovyRadNak;
+    public Stat celkovyRadVyk;
+    public Stat celkovoDodav;
+    public Stat celkovoOdobrane;
     
 
     public final static double DAY_HOUR = 24 * 60;
@@ -27,7 +33,6 @@ public class MySimulation extends Simulation {
     public MySimulation() {
         main = new Random();
         init();
-        
 
     }
 
@@ -39,7 +44,12 @@ public class MySimulation extends Simulation {
         this.mnozA = new Stat();
         this.mnozB = new Stat();
         this.celkoveOdobratie = new Stat();
-        
+        this.celkoveCakanieNak = new Stat();
+        this.celkoveCakanieVyk = new Stat();
+        this.celkovyRadNak = new Stat();
+        this.celkovyRadVyk = new Stat();
+        this.celkovoDodav = new Stat();
+        this.celkovoOdobrane = new Stat();
 
     }
 
@@ -58,6 +68,12 @@ public class MySimulation extends Simulation {
         mnozA.addSample(agentObsluhy().mnozstvo);
         mnozB.addSample(agentObsluhy().dovezene);
         celkoveOdobratie.addSample(agentObsluhy().uspesOdobratie.mean());
+        celkoveCakanieNak.addSample(agentObsluhy().cakanieNakladac.mean());
+        celkoveCakanieVyk.addSample(agentObsluhy().cakanieVykladac.mean());
+        celkovyRadNak.addSample(agentObsluhy().stpocetPredNak.mean());
+        celkovyRadVyk.addSample(agentObsluhy().stpocetPredVyk.mean());
+        celkovoDodav.addSample(agentObsluhy().statDovoz.getValue());
+        celkovoOdobrane.addSample(agentObsluhy().statOdoberania.getValue());
 
     }
 
@@ -66,9 +82,9 @@ public class MySimulation extends Simulation {
         // Dysplay simulation results
         super.simulationFinished();
         /*System.out.println(casStat.mean());
-        System.out.println(mnozA.mean());
-        System.out.println(mnozB.mean());*/
-        System.out.println("Celkove odobratie " + celkoveOdobratie.mean());
+         System.out.println(mnozA.mean());
+         System.out.println(mnozB.mean());*/
+       /* System.out.println("Celkove odobratie " + celkoveOdobratie.mean());*/
     }
 
     //meta! userInfo="Generated code: do not modify", tag="begin"
@@ -134,7 +150,5 @@ public class MySimulation extends Simulation {
     public Random getMain() {
         return main;
     }
-
-    
 
 }

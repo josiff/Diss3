@@ -14,6 +14,7 @@ public class AgentOkolia extends Agent {
 
     private LinkedHashMap<String, Car> garage;
     private ArrayList<Car> variantCar;
+    public boolean vypnutieA;
 
     public AgentOkolia(int id, Simulation mySim, Agent parent) {
         super(id, mySim, parent);
@@ -22,6 +23,7 @@ public class AgentOkolia extends Agent {
         variantCar = new ArrayList();
         initCar();
         addOwnMessage(Mc.hold);
+        vypnutieA = false;
     }
 
     @Override
@@ -31,6 +33,7 @@ public class AgentOkolia extends Agent {
         for (Car car : variantCar) {
             car.reset();
         }
+        
 
     }
 

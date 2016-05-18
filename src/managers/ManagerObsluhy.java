@@ -71,6 +71,7 @@ public class ManagerObsluhy extends Manager {
         //System.out.println("mnozstvo " + sim.mnozstvo);
         if (msg.getMnozstvo() >= 0) {
             myAgent().mnozstvo += msg.getMnozstvo();
+            myAgent().statDovoz.addValue(msg.getMnozstvo());
         } else {
             //odoberam pozadovane mnozstvo a ak nie je tak minimum
             if (myAgent().ciastocneVyloz != null) {
@@ -84,6 +85,7 @@ public class ManagerObsluhy extends Manager {
             if (myAgent().dovezene > (msg.getMnozstvo() * (-1))) {
                 myAgent().dovezene += msg.getMnozstvo();
                 myAgent().uspesOdobratie.addSample(1);
+                myAgent().statOdoberania.addValue(Math.abs(msg.getMnozstvo()));
             } else {
                 myAgent().dovezene = 0;
                 myAgent().uspesOdobratie.addSample(0);

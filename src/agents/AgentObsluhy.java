@@ -18,11 +18,16 @@ public class AgentObsluhy extends Agent {
     private SimQueue< MyMessage> radVykladac;
 
     public Stat uspesOdobratie;
+    public Stat cakanieNakladac;
+    public Stat cakanieVykladac;
+    public Statistic statOdoberania;
+    public Statistic statDovoz;
 
-    public MessageForm ciastocneVyloz;
+    public StatVarPriem stpocetPredNak;
+    public StatVarPriem stpocetPredVyk;
 
-    private ArrayList<Bager> bagreGarage, bagreInit;
-
+    public double vytazNakl;
+    public double vytazVykl;
     private double kapacitaB;
     private double mnozstvoB;
 
@@ -30,6 +35,13 @@ public class AgentObsluhy extends Agent {
     public double skladB;
     public double mnozstvo;
     public double dovezene;
+    
+    public boolean isRunningNak;
+    public boolean isRunningVyk;
+
+    public MessageForm ciastocneVyloz;
+
+    private ArrayList<Bager> bagreGarage, bagreInit;
 
     public AgentObsluhy(int id, Simulation mySim, Agent parent) {
         super(id, mySim, parent);
@@ -55,7 +67,20 @@ public class AgentObsluhy extends Agent {
         mnozstvo = skladA;
         dovezene = skladB;
 
+        vytazNakl = 1;
+        vytazVykl = 1;
+
         uspesOdobratie = new Stat();
+        cakanieNakladac = new Stat();
+        cakanieVykladac = new Stat();
+        statDovoz = new Statistic();
+        statOdoberania = new Statistic();
+
+        stpocetPredNak = new StatVarPriem(_mySim);
+        stpocetPredVyk = new StatVarPriem(_mySim);
+        
+        isRunningNak = false;
+        isRunningVyk = false;
 
         ciastocneVyloz = null;
         for (Bager bager : bagreInit) {
