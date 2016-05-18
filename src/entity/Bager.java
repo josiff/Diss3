@@ -9,6 +9,7 @@ import OSPABA.MessageForm;
 import static continualAssistants.ProcessNaklad.NAKLADANIE;
 import simulation.MyMessage;
 import simulation.MySimulation;
+import simulation.Statistic;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Bager {
     private double cena;
     private int typ;
     private boolean aktivny;
+    private Statistic vytazenie;
     
     public static final int NAKLADAC = 1;
     public static final int VYKLADAC = 2;
@@ -34,6 +36,11 @@ public class Bager {
         this.cena = cena;
         this.typ = typ;
         this.aktivny = false;
+        this.vytazenie = new Statistic();
+    }
+
+    public Bager(Bager bager) {
+        this(bager.getVykon(), bager.getStart(), bager.getEnd(), bager.getCena(), bager.getTyp());
     }
 
     public double getVykon() {
@@ -91,6 +98,16 @@ public class Bager {
     public void setAktivny(boolean aktivny) {
         this.aktivny = aktivny;
     }
+
+    public Statistic getVytazenie() {
+        return vytazenie;
+    }
+
+    public void setVytazenie(Statistic vytazenie) {
+        this.vytazenie = vytazenie;
+    }
+    
+    
     
     
     

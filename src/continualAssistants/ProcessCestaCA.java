@@ -71,7 +71,7 @@ public class ProcessCestaCA extends Process {
     private double getProcessCest(MessageForm message) {
 
         MyMessage msg = (MyMessage) message;
-        double d = VZDIALENOST / msg.getCar().getRychlost() *60.0 + msg.deliveryTime() ;
+        double d = VZDIALENOST / msg.getCar().getRychlost() * 60.0 + msg.deliveryTime() ;
         lastTime = lastTime < d  ? d : lastTime;
         return lastTime -  msg.deliveryTime();
         //return d - msg.deliveryTime();

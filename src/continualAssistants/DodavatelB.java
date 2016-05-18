@@ -27,12 +27,12 @@ public class DodavatelB extends Scheduler {
                 new EmpiricPair(new DeterministicRNG(13.0), 0.00772),
                 new EmpiricPair(new DeterministicRNG(14.0), 0.01158),
                 new EmpiricPair(new DeterministicRNG(15.0), 0.01053),
-                new EmpiricPair(new DeterministicRNG(16.0), 0.06353),
-                new EmpiricPair(new DeterministicRNG(17.0), 0.18287),
-                new EmpiricPair(new DeterministicRNG(18.0), 0.19410),
-                new EmpiricPair(new DeterministicRNG(19.0), 0.20990),
-                new EmpiricPair(new DeterministicRNG(20.0), 0.22253),
-                new EmpiricPair(new DeterministicRNG(21.0), 0.07090));
+                new EmpiricPair(new DeterministicRNG(16.0), 0.06386),
+                new EmpiricPair(new DeterministicRNG(17.0), 0.18281),
+                new EmpiricPair(new DeterministicRNG(18.0), 0.19404),
+                new EmpiricPair(new DeterministicRNG(19.0), 0.20982),
+                new EmpiricPair(new DeterministicRNG(20.0), 0.22246),
+                new EmpiricPair(new DeterministicRNG(21.0), 0.07088));
 
         expo = new ExponentialRNG(36.8, 3.0);
     }
@@ -43,21 +43,21 @@ public class DodavatelB extends Scheduler {
         // Setup component for the next replication
     }
 
-	//meta! sender="AgentOkolia", id="128", type="Start"
-	public void processStart(MessageForm message) {
+    //meta! sender="AgentOkolia", id="128", type="Start"
+    public void processStart(MessageForm message) {
         message.setCode(Mc.hold);
-        hold(expo.sample() , message);
+        hold(expo.sample(), message);
     }
 
-	//meta! userInfo="Process messages defined in code", id="0"
-	public void processDefault(MessageForm message) {
+    //meta! userInfo="Process messages defined in code", id="0"
+    public void processDefault(MessageForm message) {
         switch (message.code()) {
             case Mc.hold:
                 MessageForm copy = message.createCopy();
                 //odoslanie spravy mnozstva
                 MyMessage msg = (MyMessage) message;
-               // msg.setMnozstvo( empiric.sample().doubleValue());
-                
+                msg.setMnozstvo( empiric.sample().doubleValue());
+
                 assistantFinished(msg);
 
                 hold(expo.sample(), copy);
@@ -66,22 +66,20 @@ public class DodavatelB extends Scheduler {
         }
     }
 
-	//meta! userInfo="Generated code: do not modify", tag="begin"
-	@Override
-	public void processMessage(MessageForm message)
-	{
-		switch (message.code())
-		{
-		case Mc.start:
-			processStart(message);
-		break;
+    //meta! userInfo="Generated code: do not modify", tag="begin"
+    @Override
+    public void processMessage(MessageForm message) {
+        switch (message.code()) {
+            case Mc.start:
+                processStart(message);
+                break;
 
-		default:
-			processDefault(message);
-		break;
-		}
-	}
-	//meta! tag="end"
+            default:
+                processDefault(message);
+                break;
+        }
+    }
+    //meta! tag="end"
 
     @Override
     public AgentOkolia myAgent() {

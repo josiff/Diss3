@@ -55,7 +55,7 @@ public class Car {
         this.nalozene = 0;
         this.cena = car.getCena();
         this.rnd = new Random(seed.nextLong());
-        this.pocet = 1;
+        this.pocet = pocet;
 
     }
 
@@ -139,7 +139,8 @@ public class Car {
                 double objem = (endObsluhy / 60 - aktCas / 60) * 180.0 * 10;
                 int v = (int) objem * 10;
                 return 100 - v / getObjem();
-
+                
+                
             } else {
 
                 double objem = (endObsluhy / 60 - aktCas / 60) * 200.0 * 10;
@@ -204,6 +205,8 @@ public class Car {
         this.zacCakania = 0;
         this.usek = "";
         this.nalozene = 0;
+        this.startObsluhy = 0;
+        this.endObsluhy = 0;
     }
 
 }

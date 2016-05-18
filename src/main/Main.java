@@ -5,6 +5,12 @@
  */
 package main;
 
+import entity.Car;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import simulation.MySimulation;
 
 /**
@@ -22,11 +28,17 @@ public class Main {
          sim.simulate(1000);*/
         new gui.Gui().setVisible(true);
         
+       /* TestVariantov t = new TestVariantov();
+        
+        t.initVariant();
+        t.testujPole();*/
         
         
         
         
         
     }
+
+    
 
 }

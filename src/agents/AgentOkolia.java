@@ -14,6 +14,7 @@ public class AgentOkolia extends Agent {
 
     private LinkedHashMap<String, Car> garage;
     private ArrayList<Car> variantCar;
+    public boolean vypnutieA;
 
     public AgentOkolia(int id, Simulation mySim, Agent parent) {
         super(id, mySim, parent);
@@ -22,6 +23,7 @@ public class AgentOkolia extends Agent {
         variantCar = new ArrayList();
         initCar();
         addOwnMessage(Mc.hold);
+        vypnutieA = false;
     }
 
     @Override
@@ -31,20 +33,20 @@ public class AgentOkolia extends Agent {
         for (Car car : variantCar) {
             car.reset();
         }
+        
 
     }
 
-	//meta! userInfo="Generated code: do not modify", tag="begin"
-	private void init()
-	{
-		new ManagerOkolia(Id.managerOkolia, mySim(), this);
-		new Odoberanie(Id.odoberanie, mySim(), this);
-		new DodavatelC(Id.dodavatelC, mySim(), this);
-		new DodavatelA(Id.dodavatelA, mySim(), this);
-		new DodavatelB(Id.dodavatelB, mySim(), this);
-		addOwnMessage(Mc.initOko);
-	}
-	//meta! tag="end"
+    //meta! userInfo="Generated code: do not modify", tag="begin"
+    private void init() {
+        new ManagerOkolia(Id.managerOkolia, mySim(), this);
+        new Odoberanie(Id.odoberanie, mySim(), this);
+        new DodavatelC(Id.dodavatelC, mySim(), this);
+        new DodavatelA(Id.dodavatelA, mySim(), this);
+        new DodavatelB(Id.dodavatelB, mySim(), this);
+        addOwnMessage(Mc.initOko);
+    }
+    //meta! tag="end"
 
     public void addToGarage(Car car) {
         garage.put(car.getTyp(), car);
@@ -65,6 +67,18 @@ public class AgentOkolia extends Agent {
             Car nove = new Car(car, sim.getMain());
             variantCar.add(nove);
         }
+    }
+
+    public void addToVariantCar(String typ, int count) {
+        
+        MySimulation sim = (MySimulation) mySim();
+        Car car = garage.get(typ);
+        for (int i = 0; i < count; i++) {
+            Car nove = new Car(car, sim.getMain());
+            variantCar.add(nove);
+
+        }
+
     }
 
     public void removeVariantCar(Car car) {
@@ -107,4 +121,14 @@ public class AgentOkolia extends Agent {
         addToGarage(car);
 
     }
+    
+    public double getCena() {
+        double cena = 0;
+        for (Car car : variantCar) {
+            cena += car.getCena();
+        }
+
+        return cena;
+    }
+
 }

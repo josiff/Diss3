@@ -24,19 +24,19 @@ public class DodavatelC extends Scheduler {
                 new EmpiricPair(new DeterministicRNG(9.0), 0.01042),
                 new EmpiricPair(new DeterministicRNG(10.0), 0.00734),
                 new EmpiricPair(new DeterministicRNG(11.0), 0.01634),
-                new EmpiricPair(new DeterministicRNG(12.0), 0.01871),
+                new EmpiricPair(new DeterministicRNG(12.0), 0.01870),
                 new EmpiricPair(new DeterministicRNG(13.0), 0.01847),
                 new EmpiricPair(new DeterministicRNG(14.0), 0.01847),
-                new EmpiricPair(new DeterministicRNG(15.0), 0.02179),
-                new EmpiricPair(new DeterministicRNG(16.0), 0.02297),
-                new EmpiricPair(new DeterministicRNG(17.0), 0.01871),
-                new EmpiricPair(new DeterministicRNG(18.0), 0.02463),
+                new EmpiricPair(new DeterministicRNG(15.0), 0.02178),
+                new EmpiricPair(new DeterministicRNG(16.0), 0.02296),
+                new EmpiricPair(new DeterministicRNG(17.0), 0.01870),
+                new EmpiricPair(new DeterministicRNG(18.0), 0.02462),
                 new EmpiricPair(new DeterministicRNG(19.0), 0.02628),
-                new EmpiricPair(new DeterministicRNG(20.0), 0.02108),
-                new EmpiricPair(new DeterministicRNG(21.0), 0.14397),
-                new EmpiricPair(new DeterministicRNG(22.0), 0.20554),
-                new EmpiricPair(new DeterministicRNG(23.0), 0.22496),
-                new EmpiricPair(new DeterministicRNG(24.0), 0.18707));
+                new EmpiricPair(new DeterministicRNG(20.0), 0.02107),
+                new EmpiricPair(new DeterministicRNG(21.0), 0.14394),
+                new EmpiricPair(new DeterministicRNG(22.0), 0.20573),
+                new EmpiricPair(new DeterministicRNG(23.0), 0.22491),
+                new EmpiricPair(new DeterministicRNG(24.0), 0.18703));
 
         expo = new ExponentialRNG(25.8, 0.999);
     }

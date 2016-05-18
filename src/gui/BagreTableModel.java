@@ -21,6 +21,7 @@ public class BagreTableModel extends MyTableModel {
     final int cena = 4;
     final int typ = 5;
     final int aktivny = 6;
+    final int vytazenie = 7;
 
     public BagreTableModel(ArrayList<Bager> rows) {
         super(rows);
@@ -33,7 +34,7 @@ public class BagreTableModel extends MyTableModel {
 
     @Override
     public int getColumnCount() {
-        return 7;
+        return 8;
     }
 
     @Override
@@ -54,6 +55,8 @@ public class BagreTableModel extends MyTableModel {
                 return "Typ";
             case aktivny:
                 return "Aktívny";
+            case vytazenie:
+                return "Vyťaženie";
         }
 
         return null;
@@ -69,9 +72,9 @@ public class BagreTableModel extends MyTableModel {
             case vykon:
                 return bager.getVykon();
             case start:
-                return bager.getStart();
+                return bager.getStart()/60.0;
             case end:
-                return bager.getEnd();
+                return bager.getEnd() /60.0;
             case obsadeny:
                 return bager.isObsadeny();
             case cena:
@@ -80,6 +83,8 @@ public class BagreTableModel extends MyTableModel {
                 return bager.getTyp() == Bager.NAKLADAC ? "Nakladač" : "Vykladač";
             case aktivny:
                 return bager.isAktivny();
+            case vytazenie:
+                return bager.getVytazenie().mean();
         }
         return null;
     }
