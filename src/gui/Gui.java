@@ -34,6 +34,7 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
     private MySimulation sim;
     XYSeries avgSeriesA;
     XYSeries avgSeriesB;
+    XYSeries avgSeriesOdobranie;
 
     /**
      * Creates new form Gui
@@ -126,12 +127,8 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         lblUspesOdob = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        lblCakanieNak = new javax.swing.JLabel();
-        lblCakanieVyk = new javax.swing.JLabel();
         lblRadNak = new javax.swing.JLabel();
         lblRadVyk = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -139,14 +136,13 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
         jLabel18 = new javax.swing.JLabel();
         lblOdobrane = new javax.swing.JLabel();
         lblUspOdobInter = new javax.swing.JLabel();
-        lblCakNakInter = new javax.swing.JLabel();
-        lblCakVykInter = new javax.swing.JLabel();
         lblRadNakInter = new javax.swing.JLabel();
         lblRadVykInter = new javax.swing.JLabel();
         lblDovInter = new javax.swing.JLabel();
         lblOdobInter = new javax.swing.JLabel();
         panelGrafA = new javax.swing.JPanel();
         panelGrafB = new javax.swing.JPanel();
+        panleGrafOdobranie = new javax.swing.JPanel();
         lblDay = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -464,45 +460,33 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
 
         jLabel12.setText("Úspešnosť odobratia");
 
-        lblUspesOdob.setText("jLabel13");
-
-        jLabel13.setText("Čakanie pred nakladačom");
-
-        jLabel14.setText("Čakanie pred vykladačom");
+        lblUspesOdob.setText("0");
 
         jLabel15.setText("Dĺžka radu nakladač");
 
         jLabel16.setText("Dĺžka radu vykladač");
 
-        lblCakanieNak.setText("jLabel19");
+        lblRadNak.setText("0");
 
-        lblCakanieVyk.setText("jLabel19");
-
-        lblRadNak.setText("jLabel19");
-
-        lblRadVyk.setText("jLabel19");
+        lblRadVyk.setText("0");
 
         jLabel17.setText("Dovezene dodávateľmi");
 
-        lblDovozDod.setText("jLabel18");
+        lblDovozDod.setText("0");
 
         jLabel18.setText("Odobrané");
 
-        lblOdobrane.setText("jLabel19");
+        lblOdobrane.setText("0");
 
-        lblUspOdobInter.setText("jLabel19");
+        lblUspOdobInter.setText("0");
 
-        lblCakNakInter.setText("jLabel19");
+        lblRadNakInter.setText("0");
 
-        lblCakVykInter.setText("jLabel19");
+        lblRadVykInter.setText("0");
 
-        lblRadNakInter.setText("jLabel19");
+        lblDovInter.setText("0");
 
-        lblRadVykInter.setText("jLabel20");
-
-        lblDovInter.setText("jLabel21");
-
-        lblOdobInter.setText("jLabel21");
+        lblOdobInter.setText("0");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -510,90 +494,64 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel18))
-                        .addGap(72, 72, 72)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(lblOdobrane)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblOdobInter))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(lblDovozDod)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblDovInter))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(lblRadVyk)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblRadVykInter))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addGap(61, 61, 61)
-                        .addComponent(lblCakanieVyk)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblCakVykInter))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(61, 61, 61))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(83, 83, 83)))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblUspesOdob)
-                            .addComponent(lblCakanieNak))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(83, 83, 83)
+                        .addComponent(lblUspesOdob)
                         .addGap(173, 173, 173)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblUspOdobInter)
-                            .addComponent(lblCakNakInter)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addGap(88, 88, 88)
-                        .addComponent(lblRadNak)
+                        .addComponent(lblUspOdobInter))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(88, 88, 88)
+                                .addComponent(lblRadNak))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addGap(88, 88, 88)
+                                .addComponent(lblRadVyk))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addGap(72, 72, 72)
+                                .addComponent(lblDovozDod))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addGap(135, 135, 135)
+                                .addComponent(lblOdobrane)))
                         .addGap(173, 173, 173)
-                        .addComponent(lblRadNakInter)))
-                .addContainerGap(377, Short.MAX_VALUE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblOdobInter)
+                            .addComponent(lblDovInter)
+                            .addComponent(lblRadVykInter)
+                            .addComponent(lblRadNakInter))))
+                .addGap(17, 17, 17))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
                     .addComponent(lblUspesOdob)
                     .addComponent(lblUspOdobInter))
-                .addGap(6, 6, 6)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(lblCakanieNak)
-                    .addComponent(lblCakNakInter))
-                .addGap(6, 6, 6)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblCakanieVyk)
-                        .addComponent(lblCakVykInter)))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
                     .addComponent(lblRadNak)
                     .addComponent(lblRadNakInter))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
-                    .addComponent(lblRadVyk)
-                    .addComponent(lblRadVykInter))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblRadVyk)
+                        .addComponent(lblRadVykInter)))
+                .addGap(6, 6, 6)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDovInter)
                     .addComponent(jLabel17)
-                    .addComponent(lblDovozDod)
-                    .addComponent(lblDovInter))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(lblDovozDod))
+                .addGap(6, 6, 6)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18)
                     .addComponent(lblOdobrane)
@@ -610,6 +568,10 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
         panelGrafB.setBackground(new java.awt.Color(102, 102, 102));
         panelGrafB.setLayout(new javax.swing.BoxLayout(panelGrafB, javax.swing.BoxLayout.LINE_AXIS));
         jTabbedPane1.addTab("Graf Sklad B", panelGrafB);
+
+        panleGrafOdobranie.setBackground(new java.awt.Color(102, 102, 102));
+        panleGrafOdobranie.setLayout(new java.awt.BorderLayout());
+        jTabbedPane1.addTab("Graf odobrania", panleGrafOdobranie);
 
         lblDay.setText("day");
 
@@ -893,8 +855,6 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -920,10 +880,6 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblAktRep;
-    private javax.swing.JLabel lblCakNakInter;
-    private javax.swing.JLabel lblCakVykInter;
-    private javax.swing.JLabel lblCakanieNak;
-    private javax.swing.JLabel lblCakanieVyk;
     private javax.swing.JLabel lblCenaBagre;
     private javax.swing.JLabel lblCenaCar;
     private javax.swing.JLabel lblCountBagre;
@@ -944,6 +900,7 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
     private javax.swing.JLabel lblUspesOdob;
     private javax.swing.JPanel panelGrafA;
     private javax.swing.JPanel panelGrafB;
+    private javax.swing.JPanel panleGrafOdobranie;
     private javax.swing.JSlider slidDuration;
     private javax.swing.JSlider slidInterval;
     private javax.swing.JTable tableBagre;
@@ -970,8 +927,8 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
                 //lblTime.setText(String.valueOf((smltn.currentTime()/60.0)));
                 lblAktRep.setText(String.valueOf(smltn.currentReplication()));
                 lblUspesOdob.setText(String.valueOf(sim.celkoveOdobratie.mean()));
-                lblCakanieNak.setText(String.valueOf(sim.celkoveCakanieNak.mean()));
-                lblCakanieVyk.setText(String.valueOf(sim.celkoveCakanieVyk.mean()));
+                //  lblCakanieNak.setText(String.valueOf(sim.celkoveCakanieNak.mean()));
+                // lblCakanieVyk.setText(String.valueOf(sim.celkoveCakanieVyk.mean()));
                 lblDovozDod.setText(String.valueOf(sim.celkovoDodav.mean()));
                 lblOdobrane.setText(String.valueOf(sim.celkovoOdobrane.mean()));
                 lblRadNak.setText(String.valueOf(sim.celkovyRadNak.mean()));
@@ -979,28 +936,28 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
                 if (smltn.currentReplication() > 6) {
                     double[] d = sim.celkoveOdobratie.confidenceInterval_90();
                     lblUspOdobInter.setText(String.valueOf(d[0]) + " - " + String.valueOf(d[1]));
-                    
-                   d = sim.celkoveCakanieNak.confidenceInterval_90();
-                   lblCakNakInter.setText(String.valueOf(d[0]) + " - " + String.valueOf(d[1]));
+
+                    /* d = sim.celkoveCakanieNak.confidenceInterval_90();
+                     lblCakNakInter.setText(String.valueOf(d[0]) + " - " + String.valueOf(d[1]));
                    
-                   d = sim.celkoveCakanieVyk.confidenceInterval_90();
-                   lblCakVykInter.setText(String.valueOf(d[0]) + " - " + String.valueOf(d[1]));
-                   
-                   d = sim.celkovyRadNak.confidenceInterval_90();
-                   lblRadNakInter.setText(String.valueOf(d[0]) + " - " + String.valueOf(d[1]));
-                   
-                   d = sim.celkovyRadVyk.confidenceInterval_90();
-                   lblRadVykInter.setText(String.valueOf(d[0]) + " - " + String.valueOf(d[1]));
-                   
-                   d = sim.celkovoDodav.confidenceInterval_90();
-                   lblDovInter.setText(String.valueOf(d[0]) + " - " + String.valueOf(d[1]));
-                   
-                   d = sim.celkovoOdobrane.confidenceInterval_90();
-                   lblOdobInter.setText(String.valueOf(d[0]) + " - " + String.valueOf(d[1]));
-                     
+                     d = sim.celkoveCakanieVyk.confidenceInterval_90();
+                     lblCakVykInter.setText(String.valueOf(d[0]) + " - " + String.valueOf(d[1]));*/
+                    d = sim.celkovyRadNak.confidenceInterval_90();
+                    lblRadNakInter.setText(String.valueOf(d[0]) + " - " + String.valueOf(d[1]));
+
+                    d = sim.celkovyRadVyk.confidenceInterval_90();
+                    lblRadVykInter.setText(String.valueOf(d[0]) + " - " + String.valueOf(d[1]));
+
+                    d = sim.celkovoDodav.confidenceInterval_90();
+                    lblDovInter.setText(String.valueOf(d[0]) + " - " + String.valueOf(d[1]));
+
+                    d = sim.celkovoOdobrane.confidenceInterval_90();
+                    lblOdobInter.setText(String.valueOf(d[0]) + " - " + String.valueOf(d[1]));
+
                 }
-                
-                
+                if(sim.currentReplication() > 600)
+                 avgSeriesOdobranie.add(sim.currentReplication(), sim.celkoveOdobratie.mean());
+
                 //
                 break;
             case replicationRunning:
@@ -1013,7 +970,7 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
 
     @Override
     public void refresh(Simulation smltn) {
-        avgSeriesA.add(sim.currentTime()/60.0, sim.agentObsluhy().mnozstvo);
+        avgSeriesA.add(sim.currentTime() / 60.0, sim.agentObsluhy().mnozstvo);
         avgSeriesB.add(sim.currentTime() / 60.0, sim.agentObsluhy().dovezene);
         lblTime.setText(getTime(sim.currentTime()));
         lblAktRep.setText(String.valueOf(smltn.currentReplication()));
@@ -1028,8 +985,8 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
         lblSkladA.setText(String.valueOf(sim.agentObsluhy().mnozstvo));
         lblSkladB.setText(String.valueOf(sim.agentObsluhy().dovezene));
         lblUspesOdob.setText(String.valueOf(sim.agentObsluhy().uspesOdobratie.mean()));
-        lblCakanieNak.setText(String.valueOf(sim.agentObsluhy().cakanieNakladac.mean()));
-        lblCakanieVyk.setText(String.valueOf(sim.agentObsluhy().cakanieVykladac.mean()));
+        //lblCakanieNak.setText(String.valueOf(sim.agentObsluhy().cakanieNakladac.mean()));
+        //lblCakanieVyk.setText(String.valueOf(sim.agentObsluhy().cakanieVykladac.mean()));
         lblDovozDod.setText(String.valueOf(sim.agentObsluhy().statDovoz.getValue()));
         lblOdobrane.setText(String.valueOf(sim.agentObsluhy().statOdoberania.getValue()));
         lblRadNak.setText(String.valueOf(sim.agentObsluhy().stpocetPredNak.mean()));
@@ -1100,14 +1057,12 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
         rangeAxis.setAutoRangeIncludesZero(false);
         rangeAxis.setAutoRange(true);
 
-        
-
         ChartPanel chartPanel = new ChartPanel(lineChart);
         panelGrafA.removeAll();
         panelGrafA.add(chartPanel, BorderLayout.CENTER);
         panelGrafA.validate();
 
-         avgSeriesB = new XYSeries("Množstvo");
+        avgSeriesB = new XYSeries("Množstvo");
          XYSeriesCollection datasetB = new XYSeriesCollection(avgSeriesB);
 
          JFreeChart lineChartB = ChartFactory.createXYLineChart("Množstvo skládka B", "Čas v min.", "Množstvo", datasetB);
@@ -1117,5 +1072,17 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
          panelGrafB.removeAll();
          panelGrafB.add(chartPanelB, BorderLayout.CENTER);
          panelGrafB.validate();
+        
+        avgSeriesOdobranie = new XYSeries("Odobranie");
+        XYSeriesCollection datasetOd = new XYSeriesCollection(avgSeriesOdobranie);
+
+        JFreeChart lineChartOd = ChartFactory.createXYLineChart("Úspešnosť odobrania materiálu", "Replikácia", "Úspešnosť", datasetOd);
+        final org.jfree.chart.axis.NumberAxis rangeAxisOd = (org.jfree.chart.axis.NumberAxis) lineChartOd.getXYPlot().getRangeAxis();
+        rangeAxisOd.setAutoRangeIncludesZero(false);
+        ChartPanel chartPanelOd = new ChartPanel(lineChartOd);
+        panleGrafOdobranie.removeAll();
+        panleGrafOdobranie.add(chartPanelOd, BorderLayout.CENTER);
+        panleGrafOdobranie.validate();
+
     }
 }
