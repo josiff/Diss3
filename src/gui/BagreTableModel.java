@@ -69,9 +69,9 @@ public class BagreTableModel extends MyTableModel {
             case vykon:
                 return bager.getVykon();
             case start:
-                return bager.getStart();
+                return bager.getStart()/60.0;
             case end:
-                return bager.getEnd();
+                return bager.getEnd() /60.0;
             case obsadeny:
                 return bager.isObsadeny();
             case cena:

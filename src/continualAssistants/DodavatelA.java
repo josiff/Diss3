@@ -19,17 +19,18 @@ public class DodavatelA extends Scheduler {
         MySimulation sim = (MySimulation) mySim;
         empiric = new EmpiricRNG(
                 new EmpiricPair(new DeterministicRNG(5.0), 0.00331),
-                new EmpiricPair(new DeterministicRNG(6.0), 0.01283),
-                new EmpiricPair(new DeterministicRNG(7.0), 0.03848),
-                new EmpiricPair(new DeterministicRNG(8.0), 0.05006),
-                new EmpiricPair(new DeterministicRNG(9.0), 0.06247),
-                new EmpiricPair(new DeterministicRNG(10.0), 0.07447),
-                new EmpiricPair(new DeterministicRNG(11.0), 0.09599),
-                new EmpiricPair(new DeterministicRNG(12.0), 0.10674),
-                new EmpiricPair(new DeterministicRNG(13.0), 0.13074),
-                new EmpiricPair(new DeterministicRNG(14.0), 0.14894),
-                new EmpiricPair(new DeterministicRNG(15.0), 0.16012),
-                new EmpiricPair(new DeterministicRNG(16.0), 0.11585));
+                new EmpiricPair(new DeterministicRNG(6.0), 0.01282),
+                new EmpiricPair(new DeterministicRNG(7.0), 0.03846),
+                new EmpiricPair(new DeterministicRNG(8.0), 0.05004),
+                new EmpiricPair(new DeterministicRNG(9.0), 0.06245),
+                new EmpiricPair(new DeterministicRNG(10.0), 0.07444),
+                new EmpiricPair(new DeterministicRNG(11.0), 0.09595),
+                new EmpiricPair(new DeterministicRNG(12.0), 0.10670),
+                new EmpiricPair(new DeterministicRNG(13.0), 0.13069),
+                new EmpiricPair(new DeterministicRNG(14.0), 0.14888),
+                new EmpiricPair(new DeterministicRNG(15.0), 0.16005),
+                new EmpiricPair(new DeterministicRNG(16.0), 0.11580),
+                new EmpiricPair(new DeterministicRNG(19.0), 0.00041));
 
         expo = new ExponentialRNG(45.9, 0.999);
 
@@ -41,21 +42,21 @@ public class DodavatelA extends Scheduler {
 
     }
 
-	//meta! sender="AgentOkolia", id="124", type="Start"
-	public void processStart(MessageForm message) {
+    //meta! sender="AgentOkolia", id="124", type="Start"
+    public void processStart(MessageForm message) {
         message.setCode(Mc.hold);
-        hold(expo.sample() , message);
+        hold(expo.sample(), message);
 
     }
 
-	//meta! userInfo="Process messages defined in code", id="0"
-	public void processDefault(MessageForm message) {
+    //meta! userInfo="Process messages defined in code", id="0"
+    public void processDefault(MessageForm message) {
         switch (message.code()) {
             case Mc.hold:
                 MessageForm copy = message.createCopy();
                 //odoslanie spravy mnozstva
                 MyMessage msg = (MyMessage) message;
-                msg.setMnozstvo(empiric.sample().doubleValue());                
+                msg.setMnozstvo(empiric.sample().doubleValue());
                 assistantFinished(msg);
 
                 hold(expo.sample(), copy);
@@ -64,22 +65,20 @@ public class DodavatelA extends Scheduler {
         }
     }
 
-	//meta! userInfo="Generated code: do not modify", tag="begin"
-	@Override
-	public void processMessage(MessageForm message)
-	{
-		switch (message.code())
-		{
-		case Mc.start:
-			processStart(message);
-		break;
+    //meta! userInfo="Generated code: do not modify", tag="begin"
+    @Override
+    public void processMessage(MessageForm message) {
+        switch (message.code()) {
+            case Mc.start:
+                processStart(message);
+                break;
 
-		default:
-			processDefault(message);
-		break;
-		}
-	}
-	//meta! tag="end"
+            default:
+                processDefault(message);
+                break;
+        }
+    }
+    //meta! tag="end"
 
     @Override
     public AgentOkolia myAgent() {

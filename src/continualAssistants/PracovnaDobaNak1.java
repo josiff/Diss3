@@ -71,6 +71,10 @@ public class PracovnaDobaNak1 extends Scheduler {
         return (AgentObsluhy) super.myAgent();
     }
 
+    /**
+     * Pri zacati smeny skontrolujem ci niekto necaka
+     * @param msg 
+     */
     private void checkFront(MyMessage msg) {
         MessageForm message = null;
         if (msg.getBager().getTyp() == Bager.NAKLADAC) {

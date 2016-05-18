@@ -601,7 +601,7 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
         MyTableModel model = (MyTableModel) tableGarage.getModel();
         Car car = (Car) model.getRow(tableGarage.getSelectedRow());
         lblCenaCar.setText(String.valueOf(Double.parseDouble(lblCenaCar.getText()) + car.getCena()));
-        lblCenaCar.setText(String.valueOf(Double.parseDouble(lblCountCar.getText()) + 1));
+        lblCountCar.setText(String.valueOf(Double.parseDouble(lblCountCar.getText()) + 1));
         sim.agentOkolia().addToVariantCar(car);
         tableVariant.updateUI();
         refreshTable();
@@ -613,7 +613,7 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
         MyTableModel model = (MyTableModel) tableVariant.getModel();
         Car car = (Car) model.getRow(tableVariant.getSelectedRow());
         lblCenaCar.setText(String.valueOf(Double.parseDouble(lblCenaCar.getText()) - car.getCena()));
-        lblCenaCar.setText(String.valueOf(Double.parseDouble(lblCountCar.getText()) - 1));
+        lblCountCar.setText(String.valueOf(Double.parseDouble(lblCountCar.getText()) - 1));
         sim.agentOkolia().removeVariantCar(car);
         tableVariant.updateUI();
         refreshTable();
@@ -623,7 +623,7 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
         MyTableModel model = (MyTableModel) tableBagreGarag.getModel();
         Bager bager = (Bager) model.getRow(tableBagreGarag.getSelectedRow());
         lblCenaBagre.setText(String.valueOf(Double.parseDouble(lblCenaBagre.getText()) + bager.getCena()));
-        lblCenaBagre.setText(String.valueOf(Double.parseDouble(lblCountBagre.getText()) + 1));
+        lblCountBagre.setText(String.valueOf(Double.parseDouble(lblCountBagre.getText()) + 1));
         sim.agentObsluhy().addToBagreInit(bager);
         tableBagreInit.updateUI();
         refreshTable();
@@ -633,7 +633,7 @@ public class Gui extends javax.swing.JFrame implements ISimDelegate {
         MyTableModel model = (MyTableModel) tableBagreInit.getModel();
         Bager bager = (Bager) model.getRow(tableBagreInit.getSelectedRow());
         lblCenaBagre.setText(String.valueOf(Double.parseDouble(lblCenaBagre.getText()) - bager.getCena()));
-        lblCenaBagre.setText(String.valueOf(Double.parseDouble(lblCountBagre.getText()) - 1));
+        lblCountBagre.setText(String.valueOf(Double.parseDouble(lblCountBagre.getText()) - 1));
         sim.agentObsluhy().removeBagreInit(bager);
         tableBagreInit.updateUI();
         refreshTable();

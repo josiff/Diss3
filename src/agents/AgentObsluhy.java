@@ -2,6 +2,7 @@ package agents;
 
 import OSPABA.*;
 import OSPDataStruct.SimQueue;
+import OSPStat.Stat;
 import simulation.*;
 import managers.*;
 import continualAssistants.*;
@@ -15,6 +16,8 @@ public class AgentObsluhy extends Agent {
 
     private SimQueue< MyMessage> radNakladac;
     private SimQueue< MyMessage> radVykladac;
+
+    public Stat uspesOdobratie;
 
     public MessageForm ciastocneVyloz;
 
@@ -38,7 +41,7 @@ public class AgentObsluhy extends Agent {
 
         kapacitaB = 10000;
         skladA = 3500;
-        skladB = 9990;//1300;
+        skladB = 1300;
 
     }
 
@@ -51,6 +54,10 @@ public class AgentObsluhy extends Agent {
         mnozstvoB = kapacitaB;
         mnozstvo = skladA;
         dovezene = skladB;
+
+        uspesOdobratie = new Stat();
+
+        ciastocneVyloz = null;
         for (Bager bager : bagreInit) {
             bager.setObsadeny(false);
             bager.setAktivny(false);
@@ -83,7 +90,8 @@ public class AgentObsluhy extends Agent {
         bagreGarage.add(new Bager(180, 7 * 60.0, 18 * 60.0, 0, Bager.NAKLADAC));
         bagreGarage.add(new Bager(250, 9 * 60.0, 22 * 60.0, 0, Bager.NAKLADAC));
 
-        bagreGarage.add(new Bager(190, 7 * 60.0, 22 * 60.0, 0, Bager.VYKLADAC));
+        bagreGarage.add(new Bager(190, 7.5 * 60.0, 22 * 60.0, 0, Bager.VYKLADAC));
+        bagreGarage.add(new Bager(190, 7.5 * 60.0, 22 * 60.0, 130000, Bager.VYKLADAC));
     }
 
     public ArrayList<Bager> getBagreGarage() {
@@ -109,6 +117,12 @@ public class AgentObsluhy extends Agent {
 
     }
 
+    public void addToBagreInit(int index) {
+        Bager bager = bagreGarage.get(index);
+        Bager novy = new Bager(bager);
+        bagreInit.add(novy);
+    }
+
     public void removeBagreInit(Bager bager) {
 
         bagreInit.remove(bager);
@@ -116,6 +130,15 @@ public class AgentObsluhy extends Agent {
 
     public Bager getBager(int key) {
         return bagreInit.get(key);
+    }
+
+    public double getCena() {
+        double cena = 0;
+        for (Bager bg : bagreInit) {
+            cena += bg.getCena();
+        }
+
+        return cena;
     }
 
 }

@@ -78,9 +78,16 @@ public class ManagerObsluhy extends Manager {
                 myAgent().ciastocneVyloz = null;
                 msgRad.setAddressee(Id.processVyklad);
                 startContinualAssistant(msgRad);
-                
+
             }
-            myAgent().dovezene += Math.min(myAgent().dovezene, msg.getMnozstvo());
+            //myAgent().dovezene += Math.min(myAgent().dovezene, msg.getMnozstvo());
+            if (myAgent().dovezene > (msg.getMnozstvo() * (-1))) {
+                myAgent().dovezene += msg.getMnozstvo();
+                myAgent().uspesOdobratie.addSample(1);
+            } else {
+                myAgent().dovezene = 0;
+                myAgent().uspesOdobratie.addSample(0);
+            }
 
         }
     }
